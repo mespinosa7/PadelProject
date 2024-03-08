@@ -22,7 +22,7 @@ public class JugadorController {
         return jugadorService.findAll();
     }
 
-    @GetMapping("/admin/accounts/{username}")
+    @GetMapping("/{username}")
     //@PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public User getUserByUsername(@PathVariable String username) {

@@ -27,11 +27,11 @@ public  class User {
 
     @NotNull
     private String username;
-
+    @JsonIgnore
     @NotNull
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
