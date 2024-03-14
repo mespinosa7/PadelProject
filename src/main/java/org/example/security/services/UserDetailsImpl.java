@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * Implementación de la interfaz UserDetails que representa los detalles del usuario para la autenticación y autorización en Spring Security.
+ */
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +26,13 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
-
+    /**
+     * Constructor para crear una instancia UserDetailsImpl con los detalles del usuario.
+     * @param id ID del usuario.
+     * @param username Nombre de usuario.
+     * @param password Contraseña del usuario.
+     * @param authorities Autoridades del usuario.
+     */
     public UserDetailsImpl(Long id, String username, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -33,7 +41,11 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
         this.authorities = authorities;
     }
-
+    /**
+     * Método estático para construir un UserDetailsImpl a partir de un objeto User.
+     * @param user Objeto User del cual se extraen los detalles.
+     * @return UserDetailsImpl construido a partir del objeto User.
+     */
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities= new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().getName().name()));
@@ -44,7 +56,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getPassword(),
                 authorities);
     }
-
+    // Métodos de la interfaz UserDetails.. getters
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

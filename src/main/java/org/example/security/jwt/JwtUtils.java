@@ -8,7 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-
+/**
+ * Clase utilitaria para generar, validar y obtener información de los tokens JWT (JSON Web Tokens).
+ */
 @Component
 @Slf4j
 public class JwtUtils {
@@ -19,7 +21,12 @@ public class JwtUtils {
     @Value("${bezkoder.app.jwtExpirationMs}")
 
     private int jwtExpirationMs;
-
+    /**
+     * Genera un token JWT utilizando la información de autenticación proporcionada en el objeto Authentication.
+     *
+     * @param authentication El objeto Authentication que contiene la información de autenticación del usuario.
+     * @return El token JWT generado.
+     */
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -31,11 +38,21 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
-
+    /**
+     * Extrae el nombre de usuario del token JWT proporcionado.
+     *
+     * @param token El token JWT del cual se desea extraer el nombre de usuario.
+     * @return El nombre de usuario extraído del token JWT.
+     */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
-
+    /**
+     * Valida la firma y la integridad de un token JWT.
+     *
+     * @param authToken El token JWT que se va a validar.
+     * @return true si el token JWT es válido, false si no lo es.
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
