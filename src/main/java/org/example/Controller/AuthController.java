@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * Controlador para la autenticación de usuarios y la gestión de jugadores.
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -44,7 +46,11 @@ public class AuthController {
 
     }*/
 
-
+    /**
+     * Autentifica al usuario y genera un token JWT.
+     * @param loginRequest Objeto de solicitud de inicio de sesión.
+     * @return ResponseEntity con el token JWT y detalles del usuario autenticado.
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -68,7 +74,11 @@ public class AuthController {
                 .build());
 
     }
-
+    /**
+     * Registra un nuevo jugador en el sistema.
+     * @param signUpJugadorRequest Objeto de solicitud de registro de jugador.
+     * @return ResponseEntity con un mensaje de éxito o error.
+     */
     @PostMapping("/jugador/signup")
     public ResponseEntity<?> registrarJugador(@Valid @RequestBody SignupJugadorRequest signUpJugadorRequest) {
         if (jugadorRepository.existsByUsername(signUpJugadorRequest.getUsername())) {
