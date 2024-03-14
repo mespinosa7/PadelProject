@@ -10,7 +10,9 @@ import org.example.Enums.ERole;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
-
+/**
+ * Esta clase representa a un usuario en nuestra BD.
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
@@ -18,38 +20,63 @@ import java.util.Objects;
 @Getter
 @Setter
 public  class User {
+    /**
+     * Identificador único del usuario.
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(updatable = false, nullable = false)
     private Long id;
-
+    /**
+     * Nombre de usuario.
+     */
     private String name;
-
+    /**
+     * Nombre de usuario único utilizado para iniciar sesión.
+     */
     @NotNull
     private String username;
+    /**
+     * Contraseña del usuario.
+     */
     @JsonIgnore
     @NotNull
     private String password;
-
+    /**
+     * Rol del usuario en el sistema.
+     */
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
-
+    /**
+     * Constructor de la clase User.
+     * @param name Nombre del usuario.
+     * @param username Nombre de usuario único.
+     * @param password Contraseña del usuario.
+     * @param role Rol del usuario.
+     */
     public User(String name, String username, String password,Role role ) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.role = role;
     }
-
+    /**
+     * Compara este usuario con otro objeto para determinar si son iguales.
+     * @param o Objeto a comparar con este usuario.
+     * @return true si el objeto es igual a este usuario, false de lo contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
         return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
-
+    /**
+     * Devuelve una representación en cadena de este usuario.
+     * @return Representación en cadena del usuario.
+     */
     @Override
     public String toString() {
         return "User{" +

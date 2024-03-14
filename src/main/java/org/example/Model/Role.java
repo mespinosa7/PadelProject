@@ -8,6 +8,9 @@ import org.example.Enums.ERole;
 
 import javax.persistence.*;
 
+/**
+ * Clase que define los roles de los usuarios en el programa
+ */
 @Entity
 @Table(name = "roles")
 @Getter
@@ -15,17 +18,24 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role {
+    /**
+     * id del role
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    /**
+     * Nombre del role
+     */
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
 
 
-
-
+    /**
+     * Constructor de la clase
+     * @param name Nombre descriptivo del role
+     */
     public Role(ERole name) {
         this.id=id;
         this.name = name;
