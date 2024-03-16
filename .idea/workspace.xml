@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="62bafc85-ddb0-4905-a64e-d3568884c70d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/payload/request/SignupJugadorRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/payload/request/SignupJugadorRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/Repository/JugadorRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/Repository/JugadorRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.JugadorRepositoryTest">
+  <component name="RunManager" selected="Application.PadelProjectApplication">
     <configuration name="PadelProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.PadelProjectApplication" />
       <module name="PadelProject" />
@@ -103,8 +103,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JugadorRepositoryTest" />
         <item itemvalue="Application.PadelProjectApplication" />
+        <item itemvalue="JUnit.JugadorRepositoryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -136,5 +136,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Service/JugadorService.java</url>
+          <line>37</line>
+          <properties class="org.example.Service.JugadorService" method="insertJugador">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

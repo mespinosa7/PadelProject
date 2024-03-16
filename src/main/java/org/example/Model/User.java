@@ -49,6 +49,17 @@ public  class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @NotNull
+    private String telefono;
+    @NotNull
+    private String email;
+    @NotNull
+    private int edad;
+    @NotNull
+    private String apellidos;
+
+    private byte[] foto;
+
     /**
      * Constructor de la clase User.
      * @param name Nombre del usuario.
@@ -56,12 +67,18 @@ public  class User {
      * @param password Contraseña del usuario.
      * @param role Rol del usuario.
      */
-    public User(String name, String username, String password,Role role ) {
+    public User(Long id, String name, String username, String password, Role role, String telefono, String email, int edad, String apellidos) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.telefono = telefono;
+        this.email = email;
+        this.edad = edad;
+        this.apellidos = apellidos;
     }
+
     /**
      * Compara este usuario con otro objeto para determinar si son iguales.
      * @param o Objeto a comparar con este usuario.
