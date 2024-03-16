@@ -23,7 +23,7 @@ public class JugadorController {
      * @return Lista de usuarios que representan a los jugadores.
      */
     @GetMapping("/findAll")
-    @PreAuthorize("hasRole('ROLE_Admin')")
+   // @PreAuthorize("hasRole('ROLE_Admin')")
     @ResponseStatus(HttpStatus.OK)
     public List<User> getPlayers() {
         return jugadorService.findAll();

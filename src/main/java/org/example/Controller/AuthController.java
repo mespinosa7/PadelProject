@@ -90,6 +90,10 @@ public class AuthController {
         user.setUsername(signUpJugadorRequest.getUsername());
         user.setName(signUpJugadorRequest.getName());
         user.setPassword( encoder.encode(signUpJugadorRequest.getPassword()));
+        user.setApellidos(signUpJugadorRequest.getApellidos());
+        user.setTelefono(signUpJugadorRequest.getTelefono());
+        user.setEdad(signUpJugadorRequest.getEdad());
+        user.setEmail(signUpJugadorRequest.getEmail());
         Role role = roleRepository.findByName(ERole.ROLE_User)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         user.setRole(role);

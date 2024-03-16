@@ -67,8 +67,7 @@ public  class User {
      * @param password Contraseña del usuario.
      * @param role Rol del usuario.
      */
-    public User(Long id, String name, String username, String password, Role role, String telefono, String email, int edad, String apellidos) {
-        this.id = id;
+    public User(String name, String username, String password, Role role, String telefono, String email, int edad, String apellidos) {
         this.name = name;
         this.username = username;
         this.password = password;

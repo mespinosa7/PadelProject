@@ -37,7 +37,7 @@ class JugadorRepositoryTest {
 
         role1=roleRepository.save(new Role( ERole.ROLE_User));
         role2=roleRepository.save(new Role( ERole.ROLE_Admin));
-        user1 = jugadorRepository.save(new User( "manel","manelesp","123456",role1));
+        user1 = jugadorRepository.save(new User( "manel","manelesp","123456",role1,"1111111","manel@hotmail.com",33,"Perez"));
 
     }
     /**
@@ -57,7 +57,7 @@ class JugadorRepositoryTest {
     @Test
     void save_jugador_successful() {
 
-        User user2 = jugadorRepository.save(new User( "ignasi","manelesp1","123456",role1));
+        User user2 = jugadorRepository.save(new User( "ignasi","manelesp1","123456",role1,"1111111","manel@hotmail.com",33,"Perez"));
         assertEquals(user2,jugadorRepository.findByUsername("manelesp1").get());
 
     }
