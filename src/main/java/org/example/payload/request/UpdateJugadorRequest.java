@@ -43,16 +43,19 @@ public class UpdateJugadorRequest {
      */
     @NotNull
     private String email;
+    /**
+     * contraseña del jugador proporcionado en la solicitud de actualización.(si es diferente)
+     */
+    private String passwordActual;
 
     /**
      * Nueva contraseña del jugador proporcionado en la solicitud de actualización.(si es diferente)
      */
-    @NotNull
     private String password;
     /**
      * Nuevo role del jugador proporcionado en la solicitud de actualización.(si es diferente)
      */
-    @NotNull
+
     private Role role;
     /**
      * Nueva foto del jugador proporcionado en la solicitud de actualización.(si es diferente)

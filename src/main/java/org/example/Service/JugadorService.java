@@ -1,7 +1,9 @@
 package org.example.Service;
 
 import org.example.Model.User;
+import org.example.payload.request.UpdateJugadorRequest;
 
+import javax.validation.Valid;
 import java.util.List;
 /**
  * Interfaz que define los métodos para la gestión de jugadores.
@@ -29,7 +31,7 @@ public interface JugadorService {
      * @param jugador Objeto User con la información actualizada del jugador.
      * @return El jugador actualizado.
      */
-    public User updateJugador(User jugador);
+    public User updateJugador(@Valid UpdateJugadorRequest jugador, String username);
     /**
      * Inserta un nuevo jugador.
      * @param jugador Objeto User con la información del nuevo jugador.

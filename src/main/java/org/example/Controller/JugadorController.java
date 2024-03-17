@@ -2,6 +2,7 @@ package org.example.Controller;
 
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.example.Exceptions.NotFoundException;
 import org.example.Model.User;
 import org.example.Service.JugadorService;
 import org.example.payload.request.UpdateJugadorRequest;
@@ -67,32 +68,30 @@ public class JugadorController {
      * @param updateUserRequest   Objeto que contiene la información actualizada del jugador.
      * @return ResponseEntity con un mensaje de éxito o error.
      */
-    @PostMapping("/update/{username}")
+    @PutMapping("/update/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> updateJugador(@PathVariable String username, @Valid @RequestBody UpdateJugadorRequest updateUserRequest) {
-        // Busca el jugador por su nombre de usuario
-        User existingUser = jugadorService.findByUsername(username);
-        if (existingUser == null) {
-            // El jugador no existe, devuelve un error
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Player not found!"));
+    public ResponseEntity<?> updateJugador(HttpServletRequest request,@PathVariable String username, @Valid @RequestBody UpdateJugadorRequest updateUserRequest) throws Exception {
+        String jwt = parseJwt(request);
+        if(jwt != null &&  jwUtils.validateJwtToken(jwt)) {
+            String user = jwUtils.getUserNameFromJwtToken(jwt);
+            if (!user.equalsIgnoreCase(username)) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Usuarios diferentes!"));
+            }
+            try {
+                jugadorService.updateJugador(updateUserRequest, username);
+            } catch (NotFoundException ex) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse(ex.getMessage()));
+            }
+
         }
 
-        // Actualiza la información del jugador
-        existingUser.setName(updateUserRequest.getName());
-        existingUser.setApellidos(updateUserRequest.getApellidos());
-        existingUser.setTelefono(updateUserRequest.getTelefono());
-        existingUser.setEdad(updateUserRequest.getEdad());
-        existingUser.setEmail(updateUserRequest.getEmail());
-        existingUser.setPassword(updateUserRequest.getPassword());
-        //existingUser.setRole(updateUserRequest.getRole());
-        //existingUser.setFoto(updateUserRequest.getFoto());
-
-        // Guarda el jugador actualizado en la base de datos
-        jugadorService.updateJugador(existingUser);
-
         return ResponseEntity.ok(new MessageResponse("Player updated successfully!"));
+
+
     }
 
     /**
