@@ -100,5 +100,7 @@ public class AuthController {
         jugadorRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+
 }
 

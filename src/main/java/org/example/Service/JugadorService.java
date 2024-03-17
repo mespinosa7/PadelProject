@@ -36,4 +36,6 @@ public interface JugadorService {
      * @return El nuevo jugador insertado.
      */
     public User insertJugador(User jugador);
+
+
 }
