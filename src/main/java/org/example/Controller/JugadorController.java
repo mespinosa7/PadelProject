@@ -26,6 +26,7 @@ import java.util.List;
 @RequestMapping("api/jugador")
 //@Tag(name = "Jugador", description = "Operaciones relacionadas con Jugadores")
 @AllArgsConstructor
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class JugadorController {
     private final JugadorService jugadorService;
     private final JwtUtils jwUtils;
