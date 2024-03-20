@@ -83,8 +83,6 @@ public class JugadorServiceImpl  implements JugadorService {
             //existingUser.setFoto(updateUserRequest.getFoto());
             if(updateJugadorRequest.getPassword()!=null && !updateJugadorRequest.getPassword().isEmpty() && updateJugadorRequest.getPasswordActual()!=null && !updateJugadorRequest.getPasswordActual().isEmpty()){
                 if(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, updateJugadorRequest.getPasswordActual())).isAuthenticated()){
-
-
                     existingUser.setPassword(encoder.encode(updateJugadorRequest.getPassword()));
                 }
 

@@ -75,6 +75,37 @@ class JugadorRepositoryTest {
 
     }
 
+    /**
+     * Prueba si la edición de un usuario del repositorio a traves de setter es correcta
+     * Primero comprobamos su telelefno, luego lo editamos y comprobamos si la edicion ha
+     * tenido exito
+     */
+    @Test
+    void updateJugador() {
+        //User jugador = jugadorRepository.findByUsername("manelesp").get();
+        assertEquals("1111111", user1.getTelefono());
+        user1.setTelefono("222222222");
+        assertEquals("222222222", user1.getTelefono());
+        //assertTrue( jugadorRepository.findByUsername("Boing").isEmpty());
+    }
+
+
+
+    /**
+     * Prueba si la edición de un usuario del repositorio a traves de setter es correcta
+     */
+
+    @Test
+    void deleteJugador() {
+        User jugador = jugadorRepository.findByUsername("manelesp").get();
+        assertEquals(user1,jugador);
+        jugadorRepository.delete(jugadorRepository.findByUsername("manelesp").get());
+        assertTrue( jugadorRepository.findByUsername("manelesp").isEmpty());
+    }
+
+
+
+
 
 
 }
