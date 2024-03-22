@@ -1,0 +1,119 @@
+package org.example.Controller;
+import lombok.AllArgsConstructor;
+import org.example.Enums.ERole;
+import org.example.Exceptions.NotFoundException;
+import org.example.Model.Role;
+import org.example.Model.Ubicacion;
+import org.example.Model.User;
+import org.example.Repository.UbicacionRepository;
+import org.example.Service.UbicacionService;
+import org.example.payload.request.SignupJugadorRequest;
+import org.example.payload.request.NewUpdateUbicacionRequest;
+import org.example.payload.response.MessageResponse;
+import org.example.security.jwt.JwtUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.List;
+/**
+ * Controlador para manejar las operaciones relacionadas con las Ubicaciones.
+ */
+@RestController
+@RequestMapping("api/ubicacion")
+@AllArgsConstructor
+@CrossOrigin(origins = "*", maxAge = 3600)
+public class UbicacionController {
+    private final UbicacionService ubicacionService;
+    private final UbicacionRepository ubicacionRepository;
+    private final JwtUtils jwUtils;
+    /**
+     * Obtiene todas las Ubicaciones
+     *
+     * @return Lista de ubicaciones que representan a los pistas.
+     */
+    @GetMapping("/findAll")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Ubicacion> getUbicaciones() {
+        return ubicacionService.findAll();
+    }
+    /**
+     * Obtiene una ubicacion por su nombre.
+     *
+     * @param name Nombre de la ubicacion.
+     * @return Ubicacion.
+     */
+    @GetMapping("/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public Ubicacion getUbicacionrByName(@PathVariable String name) throws Exception {
+        return ubicacionService.findByName(name);
+
+    }
+
+    /**
+     * Actualiza la información de una ubicacion existente.
+     *
+     * @param name             Nombre de la ubicacion a actualizar.
+     * @param updateUbicacionRequest   Objeto que contiene la información actualizada de la ubicacion.
+     * @return ResponseEntity con un mensaje de éxito o error.
+     */
+    @PutMapping("/update/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> updateUbicacion(HttpServletRequest request,@PathVariable String name, @Valid @RequestBody NewUpdateUbicacionRequest updateUbicacionRequest) throws Exception {
+        String jwt = parseJwt(request);
+        if(jwt != null &&  jwUtils.validateJwtToken(jwt)) {
+            try {
+                ubicacionService.updateUbicacion(updateUbicacionRequest, name);
+            } catch (NotFoundException ex) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse(ex.getMessage()));
+            }
+
+        }
+
+        return ResponseEntity.ok(new MessageResponse("Ubicacion updated successfully!"));
+
+
+    }
+
+    @PostMapping("/insert")
+    public ResponseEntity<?> registrarUbicacion(@Valid @RequestBody NewUpdateUbicacionRequest nuevoJugador) {
+        if (ubicacionRepository.existsByName(nuevoJugador.getName())) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: La ubicacion is already taken!"));
+        }
+        Ubicacion ubicacion = new Ubicacion();
+        ubicacion.setName(nuevoJugador.getName());
+        ubicacion.setCodigo_postal(nuevoJugador.getCodigo_postal());
+        ubicacion.setDireccion(nuevoJugador.getDireccion());
+        ubicacionRepository.save(ubicacion);
+        return ResponseEntity.ok(new MessageResponse("Ubicacion registered successfully!"));
+    }
+
+
+    /**
+     * Este método analiza el encabezado de autorización de la solicitud para extraer el token JWT.
+     *
+     * @param request La solicitud HTTP entrante.
+     * @return El token JWT si está presente en el encabezado de autorización, o nulo si no se encuentra.
+     */
+    private String parseJwt(HttpServletRequest request) {
+        String headerAuth = request.getHeader("Authorization");
+
+        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+            return headerAuth.substring(7, headerAuth.length());
+        }
+
+        return null;
+    }
+
+
+
+}
+
