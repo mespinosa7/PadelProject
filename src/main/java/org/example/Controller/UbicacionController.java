@@ -80,6 +80,16 @@ public class UbicacionController {
 
     }
 
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> updateUbicacion(HttpServletRequest request,@PathVariable Long id) throws Exception {
+
+        ubicacionService.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Ubicacion deleted successfully!"));
+
+
+    }
+
     @PostMapping("/insert")
     public ResponseEntity<?> registrarUbicacion(@Valid @RequestBody NewUpdateUbicacionRequest nuevoJugador) {
         if (ubicacionRepository.existsByName(nuevoJugador.getName())) {
