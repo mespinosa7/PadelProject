@@ -26,9 +26,10 @@ public class NewPartidaRequest {
     @NotNull
     private Date dia;
     @NotNull
-    private String nameUbicacion;
+    private Long idUbicacion;
     @NotNull
     private Resultado resultado;
+
 
 
 }

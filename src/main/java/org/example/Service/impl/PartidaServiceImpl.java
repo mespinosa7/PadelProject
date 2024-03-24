@@ -65,11 +65,14 @@ public class PartidaServiceImpl implements PartidaService {
 
     @Override
     public Partida insertPartida(NewPartidaRequest newPartidaRequest) throws Exception {
-        Pareja parejaPerdedora=parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
-        Pareja parejaGanadora=parejaService.findById(newPartidaRequest.getIdParejaGanadora());
-        Partida partida=new Partida(parejaGanadora,parejaPerdedora,ubicacionService.findByName(newPartidaRequest.getNameUbicacion()),newPartidaRequest.getDia(),newPartidaRequest.getResultado());
+        Pareja parejaPerdedora = parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
+        Pareja parejaGanadora = parejaService.findById(newPartidaRequest.getIdParejaGanadora());
+        Partida partida = new Partida(parejaGanadora, parejaPerdedora, ubicacionService.findById(newPartidaRequest.getIdUbicacion()), newPartidaRequest.getDia(), newPartidaRequest.getResultado());
         return partidaRepository.save(partida);
     }
+
+
+
     @Override
     public Partida updatePartida(NewPartidaRequest newPartidaRequest, Long id) throws Exception {
         Pareja parejaPerdedora=parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
@@ -79,9 +82,12 @@ public class PartidaServiceImpl implements PartidaService {
         partida.setParejaPerdedora(parejaPerdedora);
         partida.setDia(newPartidaRequest.getDia());
         partida.setResultado(newPartidaRequest.getResultado());
-        partida.setUbicacion(ubicacionService.findByName(newPartidaRequest.getNameUbicacion()));
+        partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getIdUbicacion()));
         return partidaRepository.save(partida);
+
     }
+
+
 
 
 }
