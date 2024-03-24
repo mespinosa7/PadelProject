@@ -90,10 +90,10 @@ public class AuthServiceImpl implements AuthService {
     public void initData() {
         Role role1=roleRepository.save(new Role( ERole.ROLE_User));
         Role role2=roleRepository.save(new Role( ERole.ROLE_Admin));
-        User user1 = jugadorRepository.save(new User( "manel","manelesp","123456",role1,"1111111","manel@hotmail.com",26,"espinosa"));
-        User user2 = jugadorRepository.save(new User( "david","davidvalen","123456",role1,"1111111","david@hotmail.com",41,"valentin"));
-        User user3 = jugadorRepository.save(new User( "alex","alextell","123456",role1,"1111111","alex@hotmail.com",33,"tellez"));
-        User user4 = jugadorRepository.save(new User( "abraham","abrahamher","123456",role1,"1111111","abraham@hotmail.com",22,"herandez"));
+        User user1 = jugadorRepository.save(new User( "manel","manelesp",encoder.encode("123456"),role1,"1111111","manel@hotmail.com",26,"espinosa"));
+        User user2 = jugadorRepository.save(new User( "david","davidvalen",encoder.encode("123456"),role1,"1111111","david@hotmail.com",41,"valentin"));
+        User user3 = jugadorRepository.save(new User( "alex","alextell",encoder.encode("123456"),role1,"1111111","alex@hotmail.com",33,"tellez"));
+        User user4 = jugadorRepository.save(new User( "abraham","abrahamher",encoder.encode("123456"),role1,"1111111","abraham@hotmail.com",22,"herandez"));
         Ubicacion ubi1=ubicacionRepository.save(new Ubicacion("Padel Barceloneta","08020","Carrer Picasso 22"));
         Ubicacion ubi2=ubicacionRepository.save(new Ubicacion("Padel Magic Badalona", "08092","Carrer Casagemas 21"));
         Ubicacion ubi3=ubicacionRepository.save(new Ubicacion("Padel Sant Cugat Indor","08072","Carrer Capelles 32"));
