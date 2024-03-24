@@ -85,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
         jugadorRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
-
+    //script de inicio
     @Override
     public void initData() {
         Role role1=roleRepository.save(new Role( ERole.ROLE_User));
