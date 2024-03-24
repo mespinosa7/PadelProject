@@ -13,26 +13,26 @@ public interface UbicacionService {
      */
     public List<Ubicacion> findAll();
     /**
-     * Busca la ubicacion por su nombre.
-     * @param name Nombre de usuario del jugador a buscar.
-     * @return El jugador encontrado.
+     * Busca la ubicacion por su id.
+     * @param id
+     * @return La ubicacion encontrada.
      */
-    public Ubicacion findByName(String name);
+    public Ubicacion findById(Long id);
     /**
-     * Elimina una ubicacion por su nombre.
-     * @param name Nombre de la ubicacion a eliminar.
+     * Elimina una ubicacion por su id.
+     * @param id
      * @return true si se elimina correctamente, false de lo contrario.
      */
     //public boolean deleteByName(String name);
 
-    boolean deleteByName(String name);
+    boolean deleteById(Long id);
 
     /**
      * Actualiza la información de una ubicacion.
      * @param ubicacion Objeto Ubicacion con la información actualizada de la ubicacion.
      * @return La ubicacion actualizada.
      */
-    public Ubicacion updateUbicacion(@Valid NewUpdateUbicacionRequest ubicacion, String name);
+    public Ubicacion updateUbicacion(@Valid NewUpdateUbicacionRequest ubicacion, Long id);
     /**
      * Inserta una nueva ubicacion.
      * @param ubicacion Objeto User con la información de la nueva ubicacion.

@@ -31,11 +31,11 @@ public class Ubicacion {
      * Nombre de la ubicacion.
      */
     @NotNull
+    @Column(unique = true)
     private String name;
     /**
      * Codigo postal
      */
-    @JsonIgnore
     @NotNull
     private String codigo_postal;
     @NotNull
@@ -49,7 +49,6 @@ public class Ubicacion {
      * @param direccion
      */
     public Ubicacion(String name, String codigo_postal, String direccion) {
-        this.id = id;
         this.name = name;
         this.codigo_postal = codigo_postal;
         this.direccion = direccion;

@@ -40,4 +40,5 @@ public interface JugadorService {
     public User insertJugador(User jugador);
 
 
+    boolean existsJugador(String username);
 }

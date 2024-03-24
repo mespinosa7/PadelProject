@@ -1,6 +1,7 @@
 package org.example.Service.impl;
 import lombok.AllArgsConstructor;
 import org.example.Exceptions.NotFoundException;
+import org.example.Model.Pareja;
 import org.example.Model.Ubicacion;
 import org.example.Repository.UbicacionRepository;
 import org.example.Service.UbicacionService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -25,15 +27,19 @@ public class UbicacionServiceImpl  implements UbicacionService {
     }
 
     @Override
-    public Ubicacion findByName(String name) {
-        return ubicacionRepository.findByName(name).get();
+    public Ubicacion findById(Long id) {
+        Optional<Ubicacion> ubi=ubicacionRepository.findById(id);
+        if(ubi.isEmpty()){
+            throw new NotFoundException("La ubicacion no existe");
+        }
+        return ubi.get();
     }
 
     @Override
-    public boolean deleteByName(String name) {
+    public boolean deleteById(Long id) {
         Boolean delete=false;
         try{
-            ubicacionRepository.deleteByName(name);
+            ubicacionRepository.deleteById(id);
         }catch(Exception e){
             delete=false;
         }
@@ -41,10 +47,10 @@ public class UbicacionServiceImpl  implements UbicacionService {
     }
 
     @Override
-    public Ubicacion updateUbicacion(NewUpdateUbicacionRequest ubicacion, String name) {        // Busca el jugador por su nombre de usuario
-        Ubicacion existingUbicacion = findByName(name);
+    public Ubicacion updateUbicacion(NewUpdateUbicacionRequest ubicacion, Long id) {        // Busca el jugador por su nombre de usuario
+        Ubicacion existingUbicacion = findById(id);
         if (existingUbicacion == null) {
-            // El jugador no existe, devuelve un error
+
             throw new NotFoundException("Error: Ubicacion not found!");
         }else{
             // Actualiza la información del jugador
@@ -56,23 +62,5 @@ public class UbicacionServiceImpl  implements UbicacionService {
 
         return ubicacionRepository.save(existingUbicacion);
     }
-/*
-    @Override
-    public Ubicacion insertUbicacion(Ubicacion ubicacion) {
-        Ubicacion existingUbicacion = ubicacion;
-        if (existingUbicacion != null) {
-            // El jugador no existe, devuelve un error
-            throw new NotFoundException("Error: Ubicacion not found!");
-        }else{
-            // Actualiza la información del jugador
-            existingUbicacion.setName(ubicacion.getName());
-            existingUbicacion.setCodigo_postal(ubicacion.getCodigo_postal());
-            existingUbicacion.setDireccion(ubicacion.getDireccion());
-
-        }
-
-        return ubicacionRepository.save(existingUbicacion);
-    }
-*/
 
 }

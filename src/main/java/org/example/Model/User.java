@@ -9,6 +9,8 @@ import org.example.Enums.ERole;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 /**
  * Esta clase representa a un usuario en nuestra BD.
@@ -35,6 +37,7 @@ public  class User {
      * Nombre de usuario único utilizado para iniciar sesión.
      */
     @NotNull
+    @Column(unique = true)
     private String username;
     /**
      * Contraseña del usuario.
@@ -59,6 +62,13 @@ public  class User {
     private String apellidos;
 
     private byte[] foto;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jugador1", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pareja> parejasComoJugador1 = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "jugador2", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pareja> parejasComoJugador2 = new ArrayList<>();
 
     /**
      * Constructor de la clase User.

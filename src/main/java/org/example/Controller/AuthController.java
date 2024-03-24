@@ -6,6 +6,7 @@ import org.example.Model.Role;
 import org.example.Model.User;
 import org.example.Repository.JugadorRepository;
 import org.example.Repository.RoleRepository;
+import org.example.Service.AuthService;
 import org.example.payload.request.LoginRequest;
 import org.example.payload.request.SignupJugadorRequest;
 import org.example.payload.response.JwtResponse;
@@ -31,20 +32,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthenticationManager authenticationManager;
-    private final JugadorRepository jugadorRepository;
+    private final AuthService authService;
 
-    //private final InitMasterDataService initMasterDataService;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder encoder;
-    private final JwtUtils jwtUtils;
-
-
-    /*@GetMapping("/init_data")
-    public List<User> initData()  {
-        return initMasterDataService.initData();
-
-    }*/
 
     /**
      * Autentifica al usuario y genera un token JWT.
@@ -54,24 +43,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(JwtResponse
-                .builder()
-                .token(jwt)
-                .username(userDetails.getUsername())
-                .id(userDetails.getId())
-                .roles(roles)
-                .build());
+        return authService.authenticateUser(loginRequest);
 
     }
     /**
@@ -81,24 +53,7 @@ public class AuthController {
      */
     @PostMapping("/jugador/signup")
     public ResponseEntity<?> registrarJugador(@Valid @RequestBody SignupJugadorRequest signUpJugadorRequest) {
-        if (jugadorRepository.existsByUsername(signUpJugadorRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
-        User user = new User();
-        user.setUsername(signUpJugadorRequest.getUsername());
-        user.setName(signUpJugadorRequest.getName());
-        user.setPassword( encoder.encode(signUpJugadorRequest.getPassword()));
-        user.setApellidos(signUpJugadorRequest.getApellidos());
-        user.setTelefono(signUpJugadorRequest.getTelefono());
-        user.setEdad(signUpJugadorRequest.getEdad());
-        user.setEmail(signUpJugadorRequest.getEmail());
-        Role role = roleRepository.findByName(ERole.ROLE_User)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        user.setRole(role);
-        jugadorRepository.save(user);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return authService.registrarJugador(signUpJugadorRequest);
     }
 
 

@@ -7,8 +7,6 @@ import org.example.Model.User;
 import org.example.Repository.JugadorRepository;
 import org.example.Service.JugadorService;
 import org.example.payload.request.UpdateJugadorRequest;
-import org.example.payload.response.MessageResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 /**
  * Implementación de la interfaz JugadorService que proporciona operaciones para la gestión de jugadores.
  */
@@ -42,7 +42,11 @@ public class JugadorServiceImpl  implements JugadorService {
      */
     @Override
     public User findByUsername(String username) {
-        return jugadorRepository.findByUsername(username).get();
+        Optional<User> jugador= jugadorRepository.findByUsername(username);
+        if(jugador.isEmpty()){
+            throw new NotFoundException("Error: Player not found!");
+        }
+        return jugador.get();
     }
     /**
      * Elimina un jugador por su nombre de usuario.
@@ -68,29 +72,20 @@ public class JugadorServiceImpl  implements JugadorService {
     public User updateJugador(UpdateJugadorRequest updateJugadorRequest, String username) {
         // Busca el jugador por su nombre de usuario
         User existingUser = findByUsername(username);
-        if (existingUser == null) {
-            // El jugador no existe, devuelve un error
-            throw new NotFoundException("Error: Player not found!");
-        }else{
             // Actualiza la información del jugador
-            existingUser.setName(updateJugadorRequest.getName());
-            existingUser.setApellidos(updateJugadorRequest.getApellidos());
-            existingUser.setTelefono(updateJugadorRequest.getTelefono());
-            existingUser.setEdad(updateJugadorRequest.getEdad());
-            existingUser.setEmail(updateJugadorRequest.getEmail());
-
-            //existingUser.setRole(updateUserRequest.getRole());
-            //existingUser.setFoto(updateUserRequest.getFoto());
-            if(updateJugadorRequest.getPassword()!=null && !updateJugadorRequest.getPassword().isEmpty() && updateJugadorRequest.getPasswordActual()!=null && !updateJugadorRequest.getPasswordActual().isEmpty()){
-                if(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, updateJugadorRequest.getPasswordActual())).isAuthenticated()){
-                    existingUser.setPassword(encoder.encode(updateJugadorRequest.getPassword()));
-                }
-
+        existingUser.setName(updateJugadorRequest.getName());
+        existingUser.setApellidos(updateJugadorRequest.getApellidos());
+        existingUser.setTelefono(updateJugadorRequest.getTelefono());
+        existingUser.setEdad(updateJugadorRequest.getEdad());
+        existingUser.setEmail(updateJugadorRequest.getEmail());
+        //existingUser.setRole(updateUserRequest.getRole());
+        //existingUser.setFoto(updateUserRequest.getFoto());
+        if(updateJugadorRequest.getPassword()!=null && !updateJugadorRequest.getPassword().isEmpty() && updateJugadorRequest.getPasswordActual()!=null && !updateJugadorRequest.getPasswordActual().isEmpty()){
+            if(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, updateJugadorRequest.getPasswordActual())).isAuthenticated()){
+                existingUser.setPassword(encoder.encode(updateJugadorRequest.getPassword()));
             }
 
-
         }
-
         return jugadorRepository.save(existingUser);
     }
     /**
@@ -102,6 +97,12 @@ public class JugadorServiceImpl  implements JugadorService {
     public User insertJugador(User jugador) {
 
         return jugadorRepository.save(jugador);
+    }
+
+    @Override
+    public boolean existsJugador(String username) {
+
+        return jugadorRepository.existsByUsername(username);
     }
 
 }

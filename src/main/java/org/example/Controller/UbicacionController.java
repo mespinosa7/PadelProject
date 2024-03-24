@@ -41,32 +41,32 @@ public class UbicacionController {
         return ubicacionService.findAll();
     }
     /**
-     * Obtiene una ubicacion por su nombre.
+     * Obtiene una ubicacion por su id.
      *
-     * @param name Nombre de la ubicacion.
+     * @param id
      * @return Ubicacion.
      */
-    @GetMapping("/{name}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Ubicacion getUbicacionrByName(@PathVariable String name) throws Exception {
-        return ubicacionService.findByName(name);
+    public Ubicacion getUbicacionByName(@PathVariable Long id) throws Exception {
+        return ubicacionService.findById(id);
 
     }
 
     /**
      * Actualiza la información de una ubicacion existente.
      *
-     * @param name             Nombre de la ubicacion a actualizar.
+     * @param id
      * @param updateUbicacionRequest   Objeto que contiene la información actualizada de la ubicacion.
      * @return ResponseEntity con un mensaje de éxito o error.
      */
-    @PutMapping("/update/{name}")
+    @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> updateUbicacion(HttpServletRequest request,@PathVariable String name, @Valid @RequestBody NewUpdateUbicacionRequest updateUbicacionRequest) throws Exception {
+    public ResponseEntity<?> updateUbicacion(HttpServletRequest request,@PathVariable Long id, @Valid @RequestBody NewUpdateUbicacionRequest updateUbicacionRequest) throws Exception {
         String jwt = parseJwt(request);
         if(jwt != null &&  jwUtils.validateJwtToken(jwt)) {
             try {
-                ubicacionService.updateUbicacion(updateUbicacionRequest, name);
+                ubicacionService.updateUbicacion(updateUbicacionRequest, id);
             } catch (NotFoundException ex) {
                 return ResponseEntity
                         .badRequest()
