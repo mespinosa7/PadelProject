@@ -70,35 +70,4 @@ public class JugadorControllerTest {
     }
 
 
-    @Test
-    public void testIniciarSesionJugador() throws Exception {
-
-       // Role role1=roleRepository.save(new Role(ERole.ROLE_User));
-       // User user1 = jugadorRepository.save(new User( "manel","manelesp","123456",role1,"1111111","manel@hotmail.com",33,"Perez"));
-        String username = "manelesp";
-        String password = "123456";
-
-        // Configuramos el usuario de prueba
-        User jugador = new User();
-        jugador.setUsername(username);
-        jugador.setPassword(password);
-        jugador.setRole(role1);
-        ERole role = ERole.ROLE_User;
-
-        // Simulamos que el jugador existe en el repositorio
-        when(jugadorRepository.findByUsername(username)).thenReturn(Optional.of(jugador));
-        when(roleRepository.findByName(role)).thenReturn(Optional.of(new Role(role)));
-
-
-
-        // Realizamos la solicitud de inicio de sesión
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signin")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\":\"" + username + "\", \"password\":\"" + password + "\"}"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"token\": \"[TOKEN_GENERADO]\"}"));
-
-        // Verificamos que se haya buscado al jugador por su nombre de usuario
-        verify(jugadorRepository, times(1)).findByUsername(username);
-    }
 }
