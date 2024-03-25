@@ -44,11 +44,10 @@ public  class Partida {
     private Ubicacion ubicacion;
 
     private Date dia;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "resultado_id")
-    private Resultado resultado;
 
-    public Partida(Pareja parejaGanadora, Pareja parejaPerdedora, Ubicacion ubicacion, Date dia, Resultado resultado) {
+    private String resultado;
+
+    public Partida(Pareja parejaGanadora, Pareja parejaPerdedora, Ubicacion ubicacion, Date dia, String resultado) {
         this.parejaGanadora = parejaGanadora;
         this.parejaPerdedora = parejaPerdedora;
         this.ubicacion = ubicacion;

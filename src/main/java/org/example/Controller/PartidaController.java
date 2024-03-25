@@ -42,7 +42,7 @@ public class PartidaController {
      * @param username1
      * @return Partida.
      */
-    @GetMapping("/{username1}")
+    @GetMapping("jugadas/{username1}")
     @ResponseStatus(HttpStatus.OK)
     public PartidaResponse getPartidaByUsername(@PathVariable String username1) throws Exception {
         return partidaService.findByUsername(username1);

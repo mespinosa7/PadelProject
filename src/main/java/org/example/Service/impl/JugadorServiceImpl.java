@@ -7,6 +7,7 @@ import org.example.Model.User;
 import org.example.Repository.JugadorRepository;
 import org.example.Service.JugadorService;
 import org.example.payload.request.UpdateJugadorRequest;
+import org.example.payload.response.UserResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,6 +48,22 @@ public class JugadorServiceImpl  implements JugadorService {
             throw new NotFoundException("Error: Player not found!");
         }
         return jugador.get();
+    }
+    @Override
+    public UserResponse findUserByUsername(String username) {
+        Optional<User> jugador= jugadorRepository.findByUsername(username);
+        if(jugador.isEmpty()){
+            throw new NotFoundException("Error: Player not found!");
+        }
+        return UserResponse.builder().id(jugador.get().getId())
+                .foto(jugador.get().getFoto())
+                .edad(jugador.get().getEdad())
+                .email(jugador.get().getEmail())
+                .name(jugador.get().getName())
+                .apellidos(jugador.get().getApellidos())
+                .role(jugador.get().getRole())
+                .telefono(jugador.get().getTelefono())
+                .username(jugador.get().getUsername()).build();
     }
     /**
      * Elimina un jugador por su nombre de usuario.

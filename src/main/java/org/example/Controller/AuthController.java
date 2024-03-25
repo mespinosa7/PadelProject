@@ -13,6 +13,7 @@ import org.example.payload.response.JwtResponse;
 import org.example.payload.response.MessageResponse;
 import org.example.security.jwt.JwtUtils;
 import org.example.security.services.UserDetailsImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,6 +55,12 @@ public class AuthController {
     @PostMapping("/jugador/signup")
     public ResponseEntity<?> registrarJugador(@Valid @RequestBody SignupJugadorRequest signUpJugadorRequest) {
         return authService.registrarJugador(signUpJugadorRequest);
+    }
+
+    @PostMapping("/initData")
+    public ResponseEntity<?> insertarDatosIniciales() {
+        authService.initData();
+        return new ResponseEntity<>("Data inserted!", HttpStatus.OK);
     }
 
 

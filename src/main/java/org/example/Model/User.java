@@ -50,24 +50,28 @@ public  class User {
      */
     @OneToOne
     @JoinColumn(name = "role_id")
+    @JsonIgnore
     private Role role;
 
     @NotNull
+    @JsonIgnore
     private String telefono;
     @NotNull
+    @JsonIgnore
     private String email;
     @NotNull
+    @JsonIgnore
     private int edad;
     @NotNull
     private String apellidos;
-
+    @JsonIgnore
     private byte[] foto;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "jugador1", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "jugador1", cascade = CascadeType.ALL)
     private List<Pareja> parejasComoJugador1 = new ArrayList<>();
     @JsonIgnore
-    @OneToMany(mappedBy = "jugador2", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "jugador2", cascade = CascadeType.ALL)
     private List<Pareja> parejasComoJugador2 = new ArrayList<>();
 
     /**

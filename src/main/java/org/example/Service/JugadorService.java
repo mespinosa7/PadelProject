@@ -2,6 +2,7 @@ package org.example.Service;
 
 import org.example.Model.User;
 import org.example.payload.request.UpdateJugadorRequest;
+import org.example.payload.response.UserResponse;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +21,9 @@ public interface JugadorService {
      * @return El jugador encontrado.
      */
     public User findByUsername(String username);
+
+    UserResponse findUserByUsername(String username);
+
     /**
      * Elimina un jugador por su nombre de usuario.
      * @param username Nombre de usuario del jugador a eliminar.

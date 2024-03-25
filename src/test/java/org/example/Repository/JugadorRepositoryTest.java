@@ -29,6 +29,11 @@ class JugadorRepositoryTest {
     private User user1;
     private Role role1;
     private Role role2;
+    @Autowired
+    private PartidaRepository partidaRepository;
+    @Autowired
+    private ParejaRepository parejaRepository;
+
     /**
      * Configura el entorno para las pruebas creando roles y usuarios de ejemplo en la base de datos.
      */

@@ -39,8 +39,6 @@ public class AuthServiceImpl implements AuthService {
     private final UbicacionRepository ubicacionRepository;
     private final ParejaRepository parejaRepository;
     private final PartidaRepository partidaRepository;
-    private final SetRepository setRepository;
-    private final ResultadoRepository resultadoRepository;
 
     @Override
     public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
@@ -103,16 +101,6 @@ public class AuthServiceImpl implements AuthService {
         Pareja pareja4=parejaRepository.save(new Pareja(user2,user3));
         Pareja pareja5=parejaRepository.save(new Pareja(user2,user4));
         Pareja pareja6=parejaRepository.save(new Pareja(user3,user4));
-        Set set1=new Set(1,6);
-        Set set2=new Set(6,2);
-        Set set3=new Set(6,4);
-        Set set4=new Set(6,3);
-        List<Set> sets= new ArrayList<>();
-        sets.add(set1);
-        sets.add(set2);
-        sets.add(set3);
-        sets.add(set4);
-        Resultado resultado1=new Resultado(sets);
-        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja2,ubi1,new Date(2024,2,23),resultado1));
+        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja2,ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
     }
 }

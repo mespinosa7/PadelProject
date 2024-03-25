@@ -7,6 +7,7 @@ import org.example.Model.User;
 import org.example.Service.JugadorService;
 import org.example.payload.request.UpdateJugadorRequest;
 import org.example.payload.response.MessageResponse;
+import org.example.payload.response.UserResponse;
 import org.example.security.jwt.AuthTokenFilter;
 import org.example.security.jwt.JwtUtils;
 import org.springframework.http.HttpStatus;
@@ -50,16 +51,24 @@ public class JugadorController {
     @GetMapping("/{username}")
     @PreAuthorize("hasRole('ROLE_User')")
     @ResponseStatus(HttpStatus.OK)
-    public User getUserByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
+    public UserResponse getUserByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
         String jwt = parseJwt(request);
         if(jwt != null &&  jwUtils.validateJwtToken(jwt)){
             String user = jwUtils.getUserNameFromJwtToken(jwt);
             if(!user.equalsIgnoreCase(username)){
                 throw new Exception(("Usuarios diferentes"));
             }
-            return jugadorService.findByUsername(username);
+            return jugadorService.findUserByUsername(username);
         }
         return null;
+    }
+
+    @GetMapping("jugador/{username}")
+    @PreAuthorize("hasRole('ROLE_User')")
+    @ResponseStatus(HttpStatus.OK)
+    public User getJugadorByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
+
+        return jugadorService.findByUsername(username);
     }
 
     /**

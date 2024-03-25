@@ -3,9 +3,7 @@ package org.example.payload.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.Model.Resultado;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -28,7 +26,7 @@ public class NewPartidaRequest {
     @NotNull
     private Long idUbicacion;
     @NotNull
-    private Resultado resultado;
+    private String resultado;
 
 
 
