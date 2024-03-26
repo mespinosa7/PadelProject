@@ -39,6 +39,9 @@ public interface UbicacionRepository extends JpaRepository<Ubicacion, Long> {
      */
     boolean existsByName(String name);
 
+    void deleteById(Long id);
+
+
 
 
 

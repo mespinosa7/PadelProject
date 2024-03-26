@@ -50,8 +50,10 @@ class JugadorRepositoryTest {
      */
     @AfterEach
     void tearDown() {
+
         jugadorRepository.deleteAll();
         roleRepository.deleteAll();
+
     }
     /**
      * Prueba si se puede guardar un nuevo jugador correctamente en el repositorio.
@@ -61,7 +63,7 @@ class JugadorRepositoryTest {
      */
     @Test
     void save_jugador_successful() {
-
+        //role1=roleRepository.save(new Role( ERole.ROLE_User));
         User user2 = jugadorRepository.save(new User( "ignasi","manelesp1","123456",role1,"1111111","manel@hotmail.com",33,"Perez"));
         assertEquals(user2,jugadorRepository.findByUsername("manelesp1").get());
 
@@ -87,7 +89,7 @@ class JugadorRepositoryTest {
      */
     @Test
     void updateJugador() {
-        //User jugador = jugadorRepository.findByUsername("manelesp").get();
+        User jugador = jugadorRepository.findByUsername("manelesp").get();
         assertEquals("1111111", user1.getTelefono());
         user1.setTelefono("222222222");
         assertEquals("222222222", user1.getTelefono());
