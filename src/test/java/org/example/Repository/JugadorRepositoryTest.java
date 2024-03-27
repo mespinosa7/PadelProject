@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Esta clase contiene pruebas unitarias para el repositorio de jugadores (JugadorRepository).
  * Las pruebas se centran en probar el funcionamiento de los métodos del repositorio, como guardar
- * un jugador en la base de datos y buscar un jugador por su nombre de usuario.
+ * un jugador en la base de datos y buscar un jugador por su nombre de usuario o por id.
  */
 @SpringBootTest
 class JugadorRepositoryTest {

@@ -80,6 +80,13 @@ public class UbicacionController {
 
     }
 
+    /**
+     * Borra una ubicacion utilizando su id para buscarla en el Repository
+     * @param request La solicitud HTTP entrante.
+     * @param id
+     * @return ResponseEntity con un mensaje de éxito.
+     * @throws Exception
+     */
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> updateUbicacion(HttpServletRequest request,@PathVariable Long id) throws Exception {
@@ -90,18 +97,24 @@ public class UbicacionController {
 
     }
 
+    /**
+     * Inserta una nuevoa ubicacion
+     * @param nuevaUbicacion
+     * @return ResponseEntity con un mensaje de éxito.
+     */
+
     @PostMapping("/insert")
-    public ResponseEntity<?> registrarUbicacion(@Valid @RequestBody NewUpdateUbicacionRequest nuevoJugador) {
-        if (ubicacionRepository.existsByName(nuevoJugador.getName())) {
+    public ResponseEntity<?> registrarUbicacion(@Valid @RequestBody NewUpdateUbicacionRequest nuevaUbicacion) {
+        if (ubicacionRepository.existsByName(nuevaUbicacion.getName())) {
 
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: La ubicacion is already taken!"));
         }
         Ubicacion ubicacion = new Ubicacion();
-        ubicacion.setName(nuevoJugador.getName());
-        ubicacion.setCodigo_postal(nuevoJugador.getCodigo_postal());
-        ubicacion.setDireccion(nuevoJugador.getDireccion());
+        ubicacion.setName(nuevaUbicacion.getName());
+        ubicacion.setCodigo_postal(nuevaUbicacion.getCodigo_postal());
+        ubicacion.setDireccion(nuevaUbicacion.getDireccion());
         ubicacionRepository.save(ubicacion);
         return ResponseEntity.ok(new MessageResponse("Ubicacion registered successfully!"));
     }
