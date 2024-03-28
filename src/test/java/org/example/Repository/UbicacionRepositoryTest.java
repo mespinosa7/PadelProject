@@ -27,6 +27,8 @@ class UbicacionRepositoryTest {
     private UbicacionRepository ubicacionRepository;
 
 
+
+
     private Ubicacion ubicacion;
     private Ubicacion ubicacion2;
 
