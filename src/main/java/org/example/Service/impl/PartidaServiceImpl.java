@@ -9,6 +9,7 @@ import org.example.Service.JugadorService;
 import org.example.Service.ParejaService;
 import org.example.Service.PartidaService;
 import org.example.Service.UbicacionService;
+import org.example.Utilidades.PatternValidator;
 import org.example.payload.request.NewPartidaRequest;
 import org.example.payload.response.PartidaResponse;
 import org.springframework.stereotype.Service;
@@ -67,8 +68,15 @@ public class PartidaServiceImpl implements PartidaService {
     public Partida insertPartida(NewPartidaRequest newPartidaRequest) throws Exception {
         Pareja parejaPerdedora = parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
         Pareja parejaGanadora = parejaService.findById(newPartidaRequest.getIdParejaGanadora());
-        Partida partida = new Partida(parejaGanadora, parejaPerdedora, ubicacionService.findById(newPartidaRequest.getIdUbicacion()), newPartidaRequest.getDia(), newPartidaRequest.getResultado());
-        return partidaRepository.save(partida);
+        if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
+            Partida partida = new Partida(parejaGanadora, parejaPerdedora, ubicacionService.findById(newPartidaRequest.getIdUbicacion()), newPartidaRequest.getDia(), newPartidaRequest.getResultado());
+            return partidaRepository.save(partida);
+
+        }else{
+            throw new Exception("Los resultados de los sets no son correctos");
+        }
+
+
     }
 
 
@@ -78,16 +86,18 @@ public class PartidaServiceImpl implements PartidaService {
         Pareja parejaPerdedora=parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
         Pareja parejaGanadora=parejaService.findById(newPartidaRequest.getIdParejaGanadora());
         Partida partida=findById(id);
+        String resultadoAnterior = partida.getResultado();
         partida.setParejaGanadora(parejaGanadora);
         partida.setParejaPerdedora(parejaPerdedora);
         partida.setDia(newPartidaRequest.getDia());
-        partida.setResultado(newPartidaRequest.getResultado());
+        if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
+            partida.setResultado(newPartidaRequest.getResultado());
+        }else{
+            partida.setResultado(resultadoAnterior);
+        }
         partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getIdUbicacion()));
         return partidaRepository.save(partida);
 
     }
-
-
-
 
 }
