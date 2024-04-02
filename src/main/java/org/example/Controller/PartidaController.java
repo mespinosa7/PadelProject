@@ -76,8 +76,8 @@ public class PartidaController {
             PartidaOutDTO partidaController= new PartidaOutDTO();
             partidaController.setId(Integer.parseInt(partidasService.getId().toString()));
             partidaController.setDia(partidasService.getDia());
-            partidaController.setPareja1(partidasService.getParejaGanadora().getJugador1().getName() +  " - " + partidasService.getParejaGanadora().getJugador2().getName());
-            partidaController.setPareja2(partidasService.getParejaPerdedora().getJugador1().getName() +  " - " + partidasService.getParejaPerdedora().getJugador2().getName());
+            partidaController.setPareja1(partidasService.getPareja1().getJugador1().getName() +  " - " + partidasService.getPareja1().getJugador2().getName());
+            partidaController.setPareja2(partidasService.getPareja2().getJugador1().getName() +  " - " + partidasService.getPareja2().getJugador2().getName());
             partidaController.setResultado(partidasService.getResultado());
             partidaController.setParejaGanadora(partidasService.getParejaGanadora().getJugador1().getName() +  " - " +partidasService.getParejaGanadora().getJugador2().getName());
             partidaController.setUbicacion(partidasService.getUbicacion().getName());

@@ -66,16 +66,23 @@ public class PartidaServiceImpl implements PartidaService {
 
     @Override
     public Partida insertPartida(NewPartidaRequest newPartidaRequest) throws Exception {
-        Pareja parejaPerdedora = parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
-        Pareja parejaGanadora = parejaService.findById(newPartidaRequest.getIdParejaGanadora());
+
+        Partida partida=new Partida();
+        partida.setPareja1(parejaService.findById(newPartidaRequest.getIdPareja1()));
+        partida.setPareja2(parejaService.findById(newPartidaRequest.getIdPareja2()));
+        if(newPartidaRequest.getIdParejaGanadora()!=null && newPartidaRequest.getIdParejaPerdedora()!=null){
+            partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getIdParejaGanadora()));
+            partida.setParejaPerdedora(parejaService.findById(newPartidaRequest.getIdParejaPerdedora()));
+        }
+        partida.setDia(newPartidaRequest.getDia());
+        partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getIdUbicacion()));
         if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
-            Partida partida = new Partida(parejaGanadora, parejaPerdedora, ubicacionService.findById(newPartidaRequest.getIdUbicacion()), newPartidaRequest.getDia(), newPartidaRequest.getResultado());
-            return partidaRepository.save(partida);
+            partida.setResultado(newPartidaRequest.getResultado());
 
         }else{
-            throw new Exception("Los resultados de los sets no son correctos");
+            throw new Exception("El resultado de los sets no tienen el formato correcto");
         }
-
+        return partidaRepository.save(partida);
 
     }
 
@@ -83,12 +90,14 @@ public class PartidaServiceImpl implements PartidaService {
 
     @Override
     public Partida updatePartida(NewPartidaRequest newPartidaRequest, Long id) throws Exception {
-        Pareja parejaPerdedora=parejaService.findById(newPartidaRequest.getIdParejaPerdedora());
-        Pareja parejaGanadora=parejaService.findById(newPartidaRequest.getIdParejaGanadora());
         Partida partida=findById(id);
         String resultadoAnterior = partida.getResultado();
-        partida.setParejaGanadora(parejaGanadora);
-        partida.setParejaPerdedora(parejaPerdedora);
+        partida.setPareja1(parejaService.findById(newPartidaRequest.getIdPareja1()));
+        partida.setPareja2(parejaService.findById(newPartidaRequest.getIdPareja2()));
+        if(newPartidaRequest.getIdParejaGanadora()!=null && newPartidaRequest.getIdParejaPerdedora()!=null){
+            partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getIdParejaGanadora()));
+            partida.setParejaPerdedora(parejaService.findById(newPartidaRequest.getIdParejaPerdedora()));
+        }
         partida.setDia(newPartidaRequest.getDia());
         if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
             partida.setResultado(newPartidaRequest.getResultado());

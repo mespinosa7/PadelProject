@@ -30,7 +30,13 @@ public  class Partida {
     @Id
     @Column(updatable = false, nullable = false)
     private Long id;
+    @ManyToOne()
+    @JoinColumn(name = "pareja1")
+    private Pareja pareja1;
 
+    @ManyToOne()
+    @JoinColumn(name = "pareja2")
+    private Pareja pareja2;
     @ManyToOne()
     @JoinColumn(name = "pareja_ganadora_id")
     private Pareja parejaGanadora;

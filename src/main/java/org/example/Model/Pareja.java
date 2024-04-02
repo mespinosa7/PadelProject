@@ -50,6 +50,7 @@ public class Pareja {
     @JsonIgnore
     @OneToMany(mappedBy = "parejaPerdedora",cascade = CascadeType.PERSIST)
     private List<Partida> partidasPerdidas;
+
     /**
      * Constructor principal
      * @param jugador1
