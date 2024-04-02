@@ -2,6 +2,7 @@ package org.example.Controller;
 import lombok.AllArgsConstructor;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.Pareja;
+import org.example.Model.ParejaOutDTO;
 import org.example.Model.Ubicacion;
 import org.example.Repository.UbicacionRepository;
 import org.example.Service.ParejaService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,8 +38,24 @@ public class ParejaController {
      */
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.OK)
-    public List<Pareja> getParejas() {
-        return parejaService.findAll();
+    public List<ParejaOutDTO> getParejas() {
+        List<ParejaOutDTO> parejas = new ArrayList<ParejaOutDTO>();
+        List<Pareja> listParejaService = parejaService.findAll();
+
+        for (Pareja parejaService: listParejaService) {
+            ParejaOutDTO pareja = new ParejaOutDTO();
+            pareja.setId(Integer.parseInt(parejaService.getId().toString()));
+            pareja.setNombrePareja(parejaService.getJugador1().getName() + " - " +parejaService.getJugador2().getName());
+            pareja.setJugador1(Integer.parseInt(parejaService.getJugador1().getId().toString()));
+            pareja.setJugador2(Integer.parseInt(parejaService.getJugador2().getId().toString()));
+            pareja.setP_ganadas(parejaService.getPartidasGanadas().size());
+            pareja.setP_jugadas(parejaService.getPartidasPerdidas().size() + parejaService.getPartidasGanadas().size());
+            pareja.setP_perdidas(parejaService.getPartidasPerdidas().size());
+            pareja.setNombre_jugador1(parejaService.getJugador1().getName());
+            pareja.setNombre_jugador2(parejaService.getJugador2().getName());
+            parejas.add(pareja);
+        }
+        return parejas;
     }
     /**
      * Obtiene una Pareja por el usuario del jugador1 y el usuario del jugador2.
@@ -52,17 +70,37 @@ public class ParejaController {
         return parejaService.findByUsernames(username1,username2);
 
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ParejaOutDTO getParejaById(@PathVariable Long id) throws Exception {
+
+        //Recuperamos el onjeto pareja y lo mapeamos a un DTO de Salida valido para Front.
+        Pareja parejaServices= parejaService.findById(id);
+        ParejaOutDTO pareja = new ParejaOutDTO();
+        pareja.setId(Integer.parseInt(parejaServices.getId().toString()));
+        pareja.setNombrePareja(parejaServices.getJugador1().getName() + " - " +parejaServices.getJugador2().getName());
+        pareja.setJugador1(Integer.parseInt(parejaServices.getJugador1().getId().toString()));
+        pareja.setJugador2(Integer.parseInt(parejaServices.getJugador2().getId().toString()));
+        pareja.setP_ganadas(parejaServices.getPartidasGanadas().size());
+        pareja.setP_jugadas(parejaServices.getPartidasPerdidas().size() + parejaServices.getPartidasGanadas().size());
+        pareja.setP_perdidas(parejaServices.getPartidasPerdidas().size());
+        pareja.setNombre_jugador1(parejaServices.getJugador1().getName());
+        pareja.setNombre_jugador2(parejaServices.getJugador2().getName());
+
+        return pareja;
+    }
     /**
      * Obtiene las parejas de las que forma parte un usuario.
      * @param username1
      * @return Pareja.
      */
-    @GetMapping("/{username1}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Pareja> getParejaByUsername(@PathVariable String username1) throws Exception {
-        return parejaService.findParejasByJugador(username1);
-
-    }
+//    @GetMapping("/{username1}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Pareja> getParejaByUsername(@PathVariable String username1) throws Exception {
+//        return parejaService.findParejasByJugador(username1);
+//
+//    }
 
     @PostMapping("/insert")
     public ResponseEntity<?> registrarPareja(@Valid @RequestBody NewParejaRequest newParejaRequest) throws Exception {

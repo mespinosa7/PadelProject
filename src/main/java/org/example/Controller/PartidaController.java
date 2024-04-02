@@ -1,6 +1,7 @@
 package org.example.Controller;
 import lombok.AllArgsConstructor;
 import org.example.Model.Partida;
+import org.example.Model.PartidaOutDTO;
 import org.example.Service.PartidaService;
 import org.example.payload.request.NewPartidaRequest;
 import org.example.payload.response.MessageResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Path;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,8 +35,25 @@ public class PartidaController {
      */
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.OK)
-    public List<Partida> getPartidas() {
-        return partidaService.findAll();
+    public List<PartidaOutDTO> getPartidas() {
+        //Recuperamos todos los objetos y traspasamos los datos necesarios al FRONT
+        List<Partida> partidasService =  partidaService.findAll();
+        List<PartidaOutDTO> partidas = new ArrayList<PartidaOutDTO>();
+
+        for(Partida partida: partidasService){
+            PartidaOutDTO partidaController= new PartidaOutDTO();
+            partidaController.setId(Integer.parseInt(partida.getId().toString()));
+            partidaController.setDia(partida.getDia());
+            partidaController.setPareja1(partida.getParejaGanadora().getJugador1().getName() +  " - " + partida.getParejaGanadora().getJugador2().getName());
+            partidaController.setPareja2(partida.getParejaPerdedora().getJugador1().getName() +  " - " + partida.getParejaPerdedora().getJugador2().getName());
+            partidaController.setResultado(partida.getResultado());
+            partidaController.setParejaGanadora(partida.getParejaGanadora().getJugador1().getName() +  " - " +partida.getParejaGanadora().getJugador2().getName());
+            partidaController.setUbicacion(partida.getUbicacion().getName());
+            partidas.add(partidaController);
+        }
+
+
+        return partidas;
     }
 
     /**
@@ -51,8 +70,19 @@ public class PartidaController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Partida getPartidaByUsername(@PathVariable Long id) throws Exception {
-        return partidaService.findById(id);
+    public PartidaOutDTO getPartidaByUsername(@PathVariable Long id) throws Exception {
+        Partida partidasService =  partidaService.findById(id);
+
+            PartidaOutDTO partidaController= new PartidaOutDTO();
+            partidaController.setId(Integer.parseInt(partidasService.getId().toString()));
+            partidaController.setDia(partidasService.getDia());
+            partidaController.setPareja1(partidasService.getParejaGanadora().getJugador1().getName() +  " - " + partidasService.getParejaGanadora().getJugador2().getName());
+            partidaController.setPareja2(partidasService.getParejaPerdedora().getJugador1().getName() +  " - " + partidasService.getParejaPerdedora().getJugador2().getName());
+            partidaController.setResultado(partidasService.getResultado());
+            partidaController.setParejaGanadora(partidasService.getParejaGanadora().getJugador1().getName() +  " - " +partidasService.getParejaGanadora().getJugador2().getName());
+            partidaController.setUbicacion(partidasService.getUbicacion().getName());
+        return partidaController;
+
 
     }
 

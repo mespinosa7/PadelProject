@@ -27,10 +27,10 @@ public interface UbicacionRepository extends JpaRepository<Ubicacion, Long> {
     Optional<Ubicacion> findByName(String name);
     /**
      * Elimina una ubicacion por su nombre.
-     * @param name Nombre de la ubicacion a eliminar.
+     * @param id identificador de la ubicacion a eliminar.
      * @return true si se elimina correctamente, false de lo contrario.
      */
-    void deleteByName(String name);
+    void deleteById(int id);
 
     /**
      * Verifica si existe una ubicacion con un nombre dado.
