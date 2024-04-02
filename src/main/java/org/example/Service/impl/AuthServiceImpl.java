@@ -101,6 +101,6 @@ public class AuthServiceImpl implements AuthService {
         Pareja pareja4=parejaRepository.save(new Pareja(user2,user3));
         Pareja pareja5=parejaRepository.save(new Pareja(user2,user4));
         Pareja pareja6=parejaRepository.save(new Pareja(user3,user4));
-        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja2,ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
+        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
     }
 }

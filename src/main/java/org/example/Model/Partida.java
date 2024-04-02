@@ -53,9 +53,18 @@ public  class Partida {
 
     private String resultado;
 
-    public Partida(Pareja parejaGanadora, Pareja parejaPerdedora, Ubicacion ubicacion, Date dia, String resultado) {
+    public Partida(Pareja pareja1, Pareja pareja2,Pareja parejaGanadora, Pareja parejaPerdedora, Ubicacion ubicacion, Date dia, String resultado) {
+        this.pareja1 = pareja1;
+        this.pareja2 = pareja2;
         this.parejaGanadora = parejaGanadora;
         this.parejaPerdedora = parejaPerdedora;
+        this.ubicacion = ubicacion;
+        this.dia = dia;
+        this.resultado = resultado;
+    }
+    public Partida(Pareja pareja1, Pareja pareja2, Ubicacion ubicacion, Date dia, String resultado) {
+        this.pareja1 = pareja1;
+        this.pareja2 = pareja2;
         this.ubicacion = ubicacion;
         this.dia = dia;
         this.resultado = resultado;
