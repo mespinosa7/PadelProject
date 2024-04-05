@@ -1,14 +1,10 @@
 package org.example.Controller;
 import lombok.AllArgsConstructor;
-import org.example.Exceptions.NotFoundException;
 import org.example.Model.Pareja;
-import org.example.Model.ParejaOutDTO;
-import org.example.Model.Ubicacion;
-import org.example.Repository.UbicacionRepository;
+import org.example.DTOs.ParejaDTO;
 import org.example.Service.ParejaService;
-import org.example.Service.UbicacionService;
+import org.example.mapper.ParejaMapper;
 import org.example.payload.request.NewParejaRequest;
-import org.example.payload.request.NewUpdateUbicacionRequest;
 import org.example.payload.response.MessageResponse;
 import org.example.security.jwt.JwtUtils;
 import org.springframework.http.HttpStatus;
@@ -20,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Controlador para manejar las operaciones relacionadas con las Parejas.
@@ -30,6 +27,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ParejaController {
     private final ParejaService parejaService;
+    private final ParejaMapper parejaMapper;
     private final JwtUtils jwUtils;
     /**
      * Obtiene todas las Parejas
@@ -38,63 +36,25 @@ public class ParejaController {
      */
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.OK)
-    public List<ParejaOutDTO> getParejas() {
-        List<ParejaOutDTO> parejas = new ArrayList<ParejaOutDTO>();
-        List<Pareja> listParejaService = parejaService.findAll();
-
-        for (Pareja parejaService: listParejaService) {
-            ParejaOutDTO pareja = new ParejaOutDTO();
-            pareja.setId(Integer.parseInt(parejaService.getId().toString()));
-            pareja.setNombrePareja(parejaService.getJugador1().getName() + " - " +parejaService.getJugador2().getName());
-            pareja.setJugador1(Integer.parseInt(parejaService.getJugador1().getId().toString()));
-            pareja.setJugador2(Integer.parseInt(parejaService.getJugador2().getId().toString()));
-            pareja.setP_ganadas(parejaService.getPartidasGanadas().size());
-            pareja.setP_jugadas(parejaService.getPartidasPerdidas().size() + parejaService.getPartidasGanadas().size());
-            pareja.setP_perdidas(parejaService.getPartidasPerdidas().size());
-            pareja.setNombre_jugador1(parejaService.getJugador1().getName());
-            pareja.setNombre_jugador2(parejaService.getJugador2().getName());
-            parejas.add(pareja);
-        }
-        return parejas;
+    public List<ParejaDTO> getParejas() {
+        return parejaService.findAll().stream().map(e->parejaMapper.mapParejaToParejaDto(e)).collect(Collectors.toList());
     }
-    /**
-     * Obtiene una Pareja por el usuario del jugador1 y el usuario del jugador2.
-     *
-     * @param username1
-     * @param username2
-     * @return Pareja.
-     */
+    /*
     @GetMapping("/{username1}/{username2}")
     @ResponseStatus(HttpStatus.OK)
     public Pareja getParejaByUsernam1Username2(@PathVariable String username1,@PathVariable String username2) throws Exception {
         return parejaService.findByUsernames(username1,username2);
 
-    }
+    }*/
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ParejaOutDTO getParejaById(@PathVariable Long id) throws Exception {
+    public ParejaDTO getParejaById(@PathVariable Long id) throws Exception {
 
-        //Recuperamos el onjeto pareja y lo mapeamos a un DTO de Salida valido para Front.
-        Pareja parejaServices= parejaService.findById(id);
-        ParejaOutDTO pareja = new ParejaOutDTO();
-        pareja.setId(Integer.parseInt(parejaServices.getId().toString()));
-        pareja.setNombrePareja(parejaServices.getJugador1().getName() + " - " +parejaServices.getJugador2().getName());
-        pareja.setJugador1(Integer.parseInt(parejaServices.getJugador1().getId().toString()));
-        pareja.setJugador2(Integer.parseInt(parejaServices.getJugador2().getId().toString()));
-        pareja.setP_ganadas(parejaServices.getPartidasGanadas().size());
-        pareja.setP_jugadas(parejaServices.getPartidasPerdidas().size() + parejaServices.getPartidasGanadas().size());
-        pareja.setP_perdidas(parejaServices.getPartidasPerdidas().size());
-        pareja.setNombre_jugador1(parejaServices.getJugador1().getName());
-        pareja.setNombre_jugador2(parejaServices.getJugador2().getName());
 
-        return pareja;
+        return parejaMapper.mapParejaToParejaDto(parejaService.findById(id));
     }
-    /**
-     * Obtiene las parejas de las que forma parte un usuario.
-     * @param username1
-     * @return Pareja.
-     */
+
 //    @GetMapping("/{username1}")
 //    @ResponseStatus(HttpStatus.OK)
 //    public List<Pareja> getParejaByUsername(@PathVariable String username1) throws Exception {

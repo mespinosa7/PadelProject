@@ -1,4 +1,4 @@
-package org.example.Model;
+package org.example.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ParejaOutDTO {
+public class ParejaDTO {
     Integer id;
     Integer jugador1;
     Integer jugador2;

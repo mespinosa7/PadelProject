@@ -21,8 +21,7 @@ public interface JugadorService {
      * @return El jugador encontrado.
      */
     public User findByUsername(String username);
-
-    UserResponse findUserByUsername(String username);
+    public User findById(Long id);
 
     /**
      * Elimina un jugador por su nombre de usuario.

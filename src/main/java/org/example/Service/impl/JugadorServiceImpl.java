@@ -49,21 +49,14 @@ public class JugadorServiceImpl  implements JugadorService {
         }
         return jugador.get();
     }
+
     @Override
-    public UserResponse findUserByUsername(String username) {
-        Optional<User> jugador= jugadorRepository.findByUsername(username);
+    public User findById(Long id) {
+        Optional<User> jugador= jugadorRepository.findById(id);
         if(jugador.isEmpty()){
             throw new NotFoundException("Error: Player not found!");
         }
-        return UserResponse.builder().id(jugador.get().getId())
-                .foto(jugador.get().getFoto())
-                .edad(jugador.get().getEdad())
-                .email(jugador.get().getEmail())
-                .name(jugador.get().getName())
-                .apellidos(jugador.get().getApellidos())
-                .role(jugador.get().getRole())
-                .telefono(jugador.get().getTelefono())
-                .username(jugador.get().getUsername()).build();
+        return jugador.get();
     }
     /**
      * Elimina un jugador por su nombre de usuario.

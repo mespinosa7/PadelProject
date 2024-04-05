@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.DTOs.PartidaDTO;
 import org.example.Model.Partida;
 
 import javax.validation.constraints.NotBlank;
@@ -20,7 +21,7 @@ public class PartidaResponse {
     /**
      * Lista partidas ganadas.
      */
-    private List<Partida> partidasGanadas;
+    private List<PartidaDTO> partidasGanadas;
     /**
      * Nombre de usuario de la segunda pareja.
      */
@@ -28,7 +29,7 @@ public class PartidaResponse {
      * Lista partidas perdidas.
      */
 
-    private List<Partida> partidasPerdidas;
+    private List<PartidaDTO> partidasPerdidas;
 
     private int totalPartidasPerdidas;
     private int totalPartidasGanadas;

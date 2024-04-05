@@ -1,4 +1,4 @@
-package org.example.Model;
+package org.example.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PartidaOutDTO {
+public class PartidaDTO {
     Integer id;
     String parejaGanadora;
     String pareja1;

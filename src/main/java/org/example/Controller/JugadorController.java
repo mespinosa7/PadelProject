@@ -1,25 +1,26 @@
 package org.example.Controller;
 
 import lombok.AllArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.example.DTOs.JugadorDTO;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.User;
 import org.example.Service.JugadorService;
+import org.example.mapper.JugadorMapper;
 import org.example.payload.request.UpdateJugadorRequest;
 import org.example.payload.response.MessageResponse;
 import org.example.payload.response.UserResponse;
-import org.example.security.jwt.AuthTokenFilter;
 import org.example.security.jwt.JwtUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Controlador para manejar las operaciones relacionadas con los jugadores.
  */
@@ -30,6 +31,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class JugadorController {
     private final JugadorService jugadorService;
+    private final JugadorMapper jugadorMapper;
     private final JwtUtils jwUtils;
     /**
      * Obtiene todos los jugadores.
@@ -39,8 +41,8 @@ public class JugadorController {
     @GetMapping("/findAll")
    // @PreAuthorize("hasRole('ROLE_Admin')")
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getPlayers() {
-        return jugadorService.findAll();
+    public List<JugadorDTO> getPlayers() {
+        return jugadorService.findAll().stream().map(e->jugadorMapper.mapJugadorToJugadorDTO(e)).collect(Collectors.toList());
     }
     /**
      * Obtiene un jugador por su nombre de usuario.
@@ -51,14 +53,30 @@ public class JugadorController {
     @GetMapping("/{username}")
     @PreAuthorize("hasRole('ROLE_User')")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponse getUserByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
+    public User getUserByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
         String jwt = parseJwt(request);
         if(jwt != null &&  jwUtils.validateJwtToken(jwt)){
             String user = jwUtils.getUserNameFromJwtToken(jwt);
             if(!user.equalsIgnoreCase(username)){
                 throw new Exception(("Usuarios diferentes"));
             }
-            return jugadorService.findUserByUsername(username);
+            return jugadorService.findByUsername(username);
+        }
+        return null;
+    }
+
+    @GetMapping("/{usernameId}")
+    @PreAuthorize("hasRole('ROLE_User')")
+    @ResponseStatus(HttpStatus.OK)
+    public User getUserByUsernameId(HttpServletRequest request, @PathVariable Long usernameId) throws Exception {
+        String jwt = parseJwt(request);
+        User jugador=jugadorService.findById(usernameId);
+        if(jwt != null &&  jwUtils.validateJwtToken(jwt)){
+            String user = jwUtils.getUserNameFromJwtToken(jwt);
+            if(!user.equalsIgnoreCase(jugador.getUsername())){
+                throw new Exception(("Usuarios diferentes"));
+            }
+            return jugador;
         }
         return null;
     }
@@ -66,9 +84,9 @@ public class JugadorController {
     @GetMapping("jugador/{username}")
     @PreAuthorize("hasRole('ROLE_User')")
     @ResponseStatus(HttpStatus.OK)
-    public User getJugadorByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
+    public JugadorDTO getJugadorByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
 
-        return jugadorService.findByUsername(username);
+        return jugadorMapper.mapJugadorToJugadorDTO(jugadorService.findByUsername(username));
     }
 
     /**

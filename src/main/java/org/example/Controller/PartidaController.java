@@ -1,8 +1,9 @@
 package org.example.Controller;
 import lombok.AllArgsConstructor;
 import org.example.Model.Partida;
-import org.example.Model.PartidaOutDTO;
+import org.example.DTOs.PartidaDTO;
 import org.example.Service.PartidaService;
+import org.example.mapper.PartidaMapper;
 import org.example.payload.request.NewPartidaRequest;
 import org.example.payload.response.MessageResponse;
 import org.example.payload.response.PartidaResponse;
@@ -13,10 +14,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Controlador para manejar las operaciones relacionadas con las Partidas.
@@ -27,6 +28,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PartidaController {
     private final PartidaService partidaService;
+    private final PartidaMapper partidaMapper;
     private final JwtUtils jwUtils;
     /**
      * Obtiene todas las Partidas
@@ -35,55 +37,28 @@ public class PartidaController {
      */
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.OK)
-    public List<PartidaOutDTO> getPartidas() {
-        //Recuperamos todos los objetos y traspasamos los datos necesarios al FRONT
-        List<Partida> partidasService =  partidaService.findAll();
-        List<PartidaOutDTO> partidas = new ArrayList<PartidaOutDTO>();
+    public List<PartidaDTO> getPartidas() {
 
-        for(Partida partida: partidasService){
-            PartidaOutDTO partidaController= new PartidaOutDTO();
-            partidaController.setId(Integer.parseInt(partida.getId().toString()));
-            partidaController.setDia(partida.getDia());
-            partidaController.setPareja1(partida.getParejaGanadora().getJugador1().getName() +  " - " + partida.getParejaGanadora().getJugador2().getName());
-            partidaController.setPareja2(partida.getParejaPerdedora().getJugador1().getName() +  " - " + partida.getParejaPerdedora().getJugador2().getName());
-            partidaController.setResultado(partida.getResultado());
-            partidaController.setParejaGanadora(partida.getParejaGanadora().getJugador1().getName() +  " - " +partida.getParejaGanadora().getJugador2().getName());
-            partidaController.setUbicacion(partida.getUbicacion().getName());
-            partidas.add(partidaController);
-        }
+        return partidaService.findAll().stream().map(e->partidaMapper.mapPartidaToPartidaDto(e)).collect(Collectors.toList());
 
-
-        return partidas;
     }
 
     /**
      * Obtiene las partidas de las que forma parte un usuario.
-     * @param username1
+     * @param usernameId
      * @return Partida.
      */
-    @GetMapping("jugadas/{username1}")
+    @GetMapping("jugadas/{usernameId}")
     @ResponseStatus(HttpStatus.OK)
-    public PartidaResponse getPartidaByUsername(@PathVariable String username1) throws Exception {
-        return partidaService.findByUsername(username1);
+    public PartidaResponse getPartidaByUsernameId(@PathVariable Long usernameId) throws Exception {
+        return partidaService.findByUsernameId(usernameId);
 
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PartidaOutDTO getPartidaByUsername(@PathVariable Long id) throws Exception {
-        Partida partidasService =  partidaService.findById(id);
-
-            PartidaOutDTO partidaController= new PartidaOutDTO();
-            partidaController.setId(Integer.parseInt(partidasService.getId().toString()));
-            partidaController.setDia(partidasService.getDia());
-            partidaController.setPareja1(partidasService.getPareja1().getJugador1().getName() +  " - " + partidasService.getPareja1().getJugador2().getName());
-            partidaController.setPareja2(partidasService.getPareja2().getJugador1().getName() +  " - " + partidasService.getPareja2().getJugador2().getName());
-            partidaController.setResultado(partidasService.getResultado());
-            partidaController.setParejaGanadora(partidasService.getParejaGanadora().getJugador1().getName() +  " - " +partidasService.getParejaGanadora().getJugador2().getName());
-            partidaController.setUbicacion(partidasService.getUbicacion().getName());
-        return partidaController;
-
-
+    public PartidaDTO getPartidaById(@PathVariable Long id) throws Exception {
+        return partidaMapper.mapPartidaToPartidaDto(partidaService.findById(id));
     }
 
     @PostMapping("/insert")

@@ -17,10 +17,10 @@ public interface PartidaService {
 
     /**
      * Recupera todas las partidas en las que un user forma parte.
-     * @param username
+     * @param usernameId
      * @return Lista de todas las partidas de las que un user forma parte.
      */
-    public PartidaResponse findByUsername(String username);
+    public PartidaResponse findByUsernameId(Long usernameId);
     /**
      * Busca la partida por su id.
      * @param id

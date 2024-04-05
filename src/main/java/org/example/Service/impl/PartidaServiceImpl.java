@@ -1,5 +1,6 @@
 package org.example.Service.impl;
 import lombok.AllArgsConstructor;
+import org.example.DTOs.PartidaDTO;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.Pareja;
 import org.example.Model.Partida;
@@ -10,12 +11,14 @@ import org.example.Service.ParejaService;
 import org.example.Service.PartidaService;
 import org.example.Service.UbicacionService;
 import org.example.Utilidades.PatternValidator;
+import org.example.mapper.PartidaMapper;
 import org.example.payload.request.NewPartidaRequest;
 import org.example.payload.response.PartidaResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -26,7 +29,7 @@ public class PartidaServiceImpl implements PartidaService {
     private final JugadorService jugadorService;
     private final ParejaService parejaService;
     private final UbicacionService ubicacionService;
-
+    private final PartidaMapper partidaMapper;
 
     @Override
     public List<Partida> findAll() {
@@ -35,10 +38,12 @@ public class PartidaServiceImpl implements PartidaService {
     }
 
     @Override
-    public PartidaResponse findByUsername(String username1) {
-        User jugador=jugadorService.findByUsername(username1);
-        List<Partida> partidasGanadas=partidaRepository.findByParejaGanadora_Jugador1_UsernameOrParejaGanadora_Jugador2_Username(username1);
-        List<Partida> partidasPerdidas=partidaRepository.findByParejaPerdedora_Jugador1_UsernameOrParejaPerdedora_Jugador2_Username(username1);
+    public PartidaResponse findByUsernameId(Long usernameId) {
+        User jugador=jugadorService.findById(usernameId);
+        List<PartidaDTO> partidasGanadas=partidaRepository.findByParejaGanadora_Jugador1_UsernameOrParejaGanadora_Jugador2_Username(jugador.getUsername())
+                .stream().map(e->partidaMapper.mapPartidaToPartidaDto(e)).collect(Collectors.toList());
+        List<PartidaDTO> partidasPerdidas=partidaRepository.findByParejaPerdedora_Jugador1_UsernameOrParejaPerdedora_Jugador2_Username(jugador.getUsername())
+                .stream().map(e->partidaMapper.mapPartidaToPartidaDto(e)).collect(Collectors.toList());;
 
         return new PartidaResponse(partidasGanadas,partidasPerdidas,partidasPerdidas.size(),partidasGanadas.size(),Integer.sum(partidasGanadas.size(),partidasPerdidas.size()));
 

@@ -50,21 +50,17 @@ public  class User {
      */
     @OneToOne
     @JoinColumn(name = "role_id")
-    @JsonIgnore
     private Role role;
 
     @NotNull
-    @JsonIgnore
     private String telefono;
     @NotNull
-    @JsonIgnore
     private String email;
     @NotNull
-    @JsonIgnore
     private int edad;
     @NotNull
     private String apellidos;
-    @JsonIgnore
+
     private byte[] foto;
 
     @JsonIgnore
