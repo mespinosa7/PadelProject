@@ -12,8 +12,7 @@ import java.util.OptionalInt;
 public class JugadorMapper {
 
     public JugadorDTO mapJugadorToJugadorDTO(User jugador){
-        JugadorDTO jugadorDTO=new JugadorDTO();
-        jugadorDTO.builder()
+        JugadorDTO jugadorDTO=JugadorDTO.builder()
                 .id(jugador.getId())
                 .edad(jugador.getEdad())
                 .name(jugador.getName())

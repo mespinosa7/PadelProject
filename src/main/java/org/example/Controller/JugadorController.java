@@ -51,7 +51,7 @@ public class JugadorController {
      * @param username Nombre de usuario del jugador.
      * @return Usuario que representa al jugador.
      */
-    @GetMapping("/{username}")
+    @GetMapping("byUsername/{username}")
     @PreAuthorize("hasRole('ROLE_User')")
     @ResponseStatus(HttpStatus.OK)
     public User getUserByUsername(HttpServletRequest request, @PathVariable String username) throws Exception {
