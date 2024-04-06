@@ -89,7 +89,7 @@ public class PartidaServiceImpl implements PartidaService {
 
         }
         partida.setDia(newPartidaRequest.getDia());
-        partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getIdUbicacion()));
+        partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getUbicacion()));
         if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
             partida.setResultado(newPartidaRequest.getResultado());
 
@@ -125,9 +125,9 @@ public class PartidaServiceImpl implements PartidaService {
         if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
             partida.setResultado(newPartidaRequest.getResultado());
         }else{
-            partida.setResultado(resultadoAnterior);
+            throw new Exception("El resultado de los sets no tienen el formato correcto");
         }
-        partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getIdUbicacion()));
+        partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getUbicacion()));
         return partidaRepository.save(partida);
 
     }
