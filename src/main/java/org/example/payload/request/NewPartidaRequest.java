@@ -29,6 +29,6 @@ public class NewPartidaRequest {
     private Long pareja2;
     private Date dia;
     @NotNull
-    private Long idUbicacion;
+    private Long ubicacion;
     private String resultado;
 }
