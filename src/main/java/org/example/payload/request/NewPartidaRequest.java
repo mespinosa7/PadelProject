@@ -17,16 +17,18 @@ public class NewPartidaRequest {
     /**
      * .
      */
+
     @NotNull
-    private Long idPareja1;
+    private Long  id;
+    private Long parejaGanadora;
+
+    private Long parejaPerdedora;
     @NotNull
-    private Long idPareja2;
-    private Long idParejaGanadora;
-    private Long idParejaPerdedora;
+    private Long pareja1;
     @NotNull
+    private Long pareja2;
     private Date dia;
     @NotNull
     private Long idUbicacion;
     private String resultado;
-
 }
