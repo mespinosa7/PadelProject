@@ -29,7 +29,7 @@ public class PartidaServiceImpl implements PartidaService {
     private final JugadorService jugadorService;
     private final ParejaService parejaService;
     private final UbicacionService ubicacionService;
-    private final PartidaMapper partidaMapper;
+    private final PartidaMapper partidaMapper =new PartidaMapper();
 
     @Override
     public List<Partida> findAll() {

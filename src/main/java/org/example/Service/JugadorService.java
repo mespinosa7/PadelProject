@@ -21,6 +21,11 @@ public interface JugadorService {
      * @return El jugador encontrado.
      */
     public User findByUsername(String username);
+    /**
+     * Busca un jugador por su Id de  usuario.
+     * @param id Identificador de usuario del jugador a buscar.
+     * @return El jugador encontrado.
+     */
     public User findById(Long id);
 
     /**

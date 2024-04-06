@@ -10,6 +10,7 @@ import org.example.payload.request.UpdateJugadorRequest;
 import org.example.payload.response.MessageResponse;
 import org.example.payload.response.UserResponse;
 import org.example.security.jwt.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class JugadorController {
     private final JugadorService jugadorService;
-    private final JugadorMapper jugadorMapper;
+    private final JugadorMapper jugadorMapper= new JugadorMapper();
     private final JwtUtils jwUtils;
     /**
      * Obtiene todos los jugadores.

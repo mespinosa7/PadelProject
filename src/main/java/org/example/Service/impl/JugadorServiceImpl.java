@@ -51,8 +51,8 @@ public class JugadorServiceImpl  implements JugadorService {
     }
 
     @Override
-    public User findById(Long id) {
-        Optional<User> jugador= jugadorRepository.findById(id);
+    public User findById(Long ident) {
+        Optional<User> jugador= jugadorRepository.findById(ident);
         if(jugador.isEmpty()){
             throw new NotFoundException("Error: Player not found!");
         }

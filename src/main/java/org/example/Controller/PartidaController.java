@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PartidaController {
     private final PartidaService partidaService;
-    private final PartidaMapper partidaMapper;
+    private final PartidaMapper partidaMapper = new PartidaMapper();
     private final JwtUtils jwUtils;
     /**
      * Obtiene todas las Partidas

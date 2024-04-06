@@ -34,4 +34,11 @@ public interface JugadorRepository extends JpaRepository<User, Long> {
      * @return Verdadero si existe un usuario con el nombre de usuario dado, falso de lo contrario.
      */
     boolean existsByUsername(String username);
+
+    /**
+     * Busca un usuario por su id de usuario.
+     * @param id Nombre de usuario del usuario a buscar.
+     * @return El usuario encontrado, o vacío si no se encuentra.
+     */
+    Optional<User> findById(Long id);
 }

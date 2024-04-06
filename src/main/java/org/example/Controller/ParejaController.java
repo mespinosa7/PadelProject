@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ParejaController {
     private final ParejaService parejaService;
-    private final ParejaMapper parejaMapper;
+    private final ParejaMapper parejaMapper = new ParejaMapper();
     private final JwtUtils jwUtils;
     /**
      * Obtiene todas las Parejas
