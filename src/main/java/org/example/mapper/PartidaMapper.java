@@ -13,7 +13,7 @@ public class PartidaMapper {
         partidaDTO.setDia(partida.getDia());
         partidaDTO.setPareja1(partida.getPareja1().getJugador1().getName() +  " - " + partida.getPareja1().getJugador2().getName());
         partidaDTO.setPareja2(partida.getPareja2().getJugador1().getName() +  " - " + partida.getPareja2().getJugador2().getName());
-        partidaDTO.setResultado(partida.getResultado());
+        partidaDTO.setResultado(partida.getResultado()!=null?partida.getResultado():null);
         if (partida.getParejaGanadora()!=null && partida.getParejaPerdedora()!=null){
             partidaDTO.setParejaGanadora(partida.getParejaGanadora().getJugador1().getName() +  " - " +partida.getParejaGanadora().getJugador2().getName());
         }

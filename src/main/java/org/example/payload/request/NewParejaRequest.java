@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Clase que representa la solicitud de creacion de nueva pareja.
@@ -16,12 +17,12 @@ public class NewParejaRequest {
     /**
      * Nombre del usuario de la primera pareja.
      */
-    @NotBlank
-    private String username1;
+    @NotNull
+    private Long user1Id;
     /**
      * Nombre de usuario de la segunda pareja.
      */
-    @NotBlank
-    private String username2;
+    @NotNull
+    private Long user2Id;
 
 }

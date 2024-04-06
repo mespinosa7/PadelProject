@@ -75,9 +75,18 @@ public class PartidaServiceImpl implements PartidaService {
         Partida partida=new Partida();
         partida.setPareja1(parejaService.findById(newPartidaRequest.getPareja1()));
         partida.setPareja2(parejaService.findById(newPartidaRequest.getPareja2()));
-        if(newPartidaRequest.getParejaGanadora()!=null && newPartidaRequest.getParejaPerdedora()!=null){
-            partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getParejaGanadora()));
-            partida.setParejaPerdedora(parejaService.findById(newPartidaRequest.getParejaPerdedora()));
+        if(partida.getPareja1().getJugador1().equals(partida.getPareja2().getJugador1())||partida.getPareja1().getJugador1().equals(partida.getPareja2().getJugador2())
+        ||partida.getPareja1().getJugador2().equals(partida.getPareja2().getJugador1())||partida.getPareja1().getJugador2().equals(partida.getPareja2().getJugador2())){
+            throw new Exception("Uno de los jugadores de la partida se encuentra en las dos parejas rivales");
+        }
+        if(newPartidaRequest.getParejaGanadora()!=null){
+            if(newPartidaRequest.getParejaGanadora().equals(partida.getPareja1().getId())||newPartidaRequest.getParejaGanadora().equals(partida.getPareja2().getId())){
+                partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getParejaGanadora()));
+                partida.setParejaPerdedora(partida.getParejaGanadora().equals(partida.getPareja1())?partida.getPareja2():partida.getPareja1());
+            }else{
+                throw new Exception("La pareja ganadora no se encuentra entre las participantes!");
+            }
+
         }
         partida.setDia(newPartidaRequest.getDia());
         partida.setUbicacion(ubicacionService.findById(newPartidaRequest.getIdUbicacion()));
@@ -99,9 +108,18 @@ public class PartidaServiceImpl implements PartidaService {
         String resultadoAnterior = partida.getResultado();
         partida.setPareja1(parejaService.findById(newPartidaRequest.getPareja1()));
         partida.setPareja2(parejaService.findById(newPartidaRequest.getPareja2()));
-        if(newPartidaRequest.getParejaGanadora()!=null && newPartidaRequest.getParejaPerdedora()!=null){
-            partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getParejaGanadora()));
-            partida.setParejaPerdedora(parejaService.findById(newPartidaRequest.getParejaPerdedora()));
+        if(partida.getPareja1().getJugador1().equals(partida.getPareja2().getJugador1())||partida.getPareja1().getJugador1().equals(partida.getPareja2().getJugador2())
+                ||partida.getPareja1().getJugador2().equals(partida.getPareja2().getJugador1())||partida.getPareja1().getJugador2().equals(partida.getPareja2().getJugador2())){
+            throw new Exception("Uno de los jugadores de la partida se encuentra en las dos parejas rivales");
+        }
+        if(newPartidaRequest.getParejaGanadora()!=null){
+            if(newPartidaRequest.getParejaGanadora().equals(partida.getPareja1().getId())||newPartidaRequest.getParejaPerdedora().equals(partida.getPareja2().getId())){
+                partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getParejaGanadora()));
+                partida.setParejaPerdedora(partida.getParejaGanadora().equals(partida.getPareja1())?partida.getPareja2():partida.getPareja1());
+            }else{
+                throw new Exception("La pareja ganadora no se encuentra entre las participantes!");
+            }
+
         }
         partida.setDia(newPartidaRequest.getDia());
         if(PatternValidator.validarPattern(newPartidaRequest.getResultado())){
