@@ -56,14 +56,16 @@ public class PadelProjectApplication {
      * @param authService El servicio de autenticación utilizado para inicializar los datos.
      * @return CommandLineRunner que ejecutará el método initData() del servicio de autenticación al iniciar la aplicación.
      */
-    /*
+/*
     @Bean
     public CommandLineRunner commandLineRunner(AuthServiceImpl authService) {
         return args -> {
             authService.initData();
         };
     }
-    */
+
+ */
+
 
     
 }
