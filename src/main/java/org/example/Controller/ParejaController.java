@@ -62,6 +62,12 @@ public class ParejaController {
 //
 //    }
 
+    /**
+     * Inserta una nueva pareja
+     * @param newParejaRequest datos de la nueva pareja
+     * @return respuesta si la pareja se ha insertado correctamente
+     * @throws Exception
+     */
     @PostMapping("/insert")
     public ResponseEntity<?> registrarPareja(@Valid @RequestBody NewParejaRequest newParejaRequest) throws Exception {
 

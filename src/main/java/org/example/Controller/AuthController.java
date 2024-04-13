@@ -57,6 +57,11 @@ public class AuthController {
         return authService.registrarJugador(signUpJugadorRequest);
     }
 
+    /**
+     * Inicializa datos para entorno de pruebas.. si es invocado
+      * @return con un mensaje de éxito o error.
+     */
+
     @PostMapping("/initData")
     public ResponseEntity<?> insertarDatosIniciales() {
         authService.initData();

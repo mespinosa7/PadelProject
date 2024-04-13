@@ -26,9 +26,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Implementación del servicio de autenticación.
+ */
 @Service
-
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
@@ -39,7 +40,12 @@ public class AuthServiceImpl implements AuthService {
     private final UbicacionRepository ubicacionRepository;
     private final ParejaRepository parejaRepository;
     private final PartidaRepository partidaRepository;
-
+    /**
+     * Autentica un usuario con las credenciales proporcionadas.
+     *
+     * @param loginRequest La solicitud de inicio de sesión.
+     * @return ResponseEntity con la respuesta de autenticación.
+     */
     @Override
     public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -61,7 +67,12 @@ public class AuthServiceImpl implements AuthService {
                 .roles(roles)
                 .build());
     }
-
+    /**
+     * Registra un nuevo jugador en el sistema.
+     *
+     * @param signUpJugadorRequest La solicitud de registro de jugador.
+     * @return ResponseEntity con la respuesta del registro.
+     */
     @Override
     public ResponseEntity<?> registrarJugador(SignupJugadorRequest signUpJugadorRequest) {
         if (jugadorRepository.existsByUsername(signUpJugadorRequest.getUsername())) {
@@ -83,6 +94,9 @@ public class AuthServiceImpl implements AuthService {
         jugadorRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+    /**
+     * Inicializa datos de prueba en la base de datos.
+     */
     //script de inicio
     @Override
     public void initData() {

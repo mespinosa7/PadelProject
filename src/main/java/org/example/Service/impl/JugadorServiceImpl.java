@@ -50,6 +50,11 @@ public class JugadorServiceImpl  implements JugadorService {
         return jugador.get();
     }
 
+    /**
+     * Método apra buscar un usuario por su id
+     * @param ident Identificador de usuario del jugador a buscar.
+     * @return
+     */
     @Override
     public User findById(Long ident) {
         Optional<User> jugador= jugadorRepository.findById(ident);
@@ -109,6 +114,11 @@ public class JugadorServiceImpl  implements JugadorService {
         return jugadorRepository.save(jugador);
     }
 
+    /**
+     * Metodo para comprobar si existe un jugador por su username
+     * @param username nombre que utiliza el usuario para iniciar sesion
+     * @return booleano true/false dependiendo del resultado
+     */
     @Override
     public boolean existsJugador(String username) {
 

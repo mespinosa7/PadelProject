@@ -20,7 +20,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Esta clase contiene pruebas unitarias para el servicio de Jugadores (JugadorService).
+ * Las pruebas se centran en probar el funcionamiento de los métodos del servicio, como buscar
+ * jugadores por nombre de usuario, verificar si un jugador existe, insertar un nuevo jugador, etc.
+ */
 @SpringBootTest
 public class JugadorServiceTest {
 
@@ -36,8 +40,9 @@ public class JugadorServiceTest {
     private Role role1;
 
 
-
-
+    /**
+     * Configura el entorno para las pruebas creando jugadores y roles de ejemplo en la base de datos.
+     */
     @BeforeEach
     void setup(){
         role1=roleRepository.save(new Role( ERole.ROLE_User));
@@ -56,7 +61,9 @@ public class JugadorServiceTest {
 
     }
 
-
+    /**
+     * Prueba el método `findAll` del servicio de jugadores para asegurar que devuelve todos los jugadores.
+     */
     @Test
     void findByAll(){
         List<User> lista = new ArrayList<User>();
@@ -75,7 +82,9 @@ public class JugadorServiceTest {
         assertTrue(resultadoTamano,"El tamaño no se corresponder");
 
     }
-
+    /**
+     * Prueba el método `findByUsername` del servicio de jugadores para buscar un jugador por su nombre de usuario.
+     */
     @Test
     void findByUsername(){
         User user = jugadorService.findByUsername("manelesp");
@@ -104,7 +113,9 @@ public class JugadorServiceTest {
 
 
 
-
+    /**
+     * Prueba el método `existsJugador` del servicio de jugadores para verificar si un jugador existe por su nombre de inicio de sesion.
+     */
     @Test
     void existsJugador(){
         boolean resultado = jugadorService.existsJugador("manelesp");
@@ -113,7 +124,9 @@ public class JugadorServiceTest {
     }
 
 
-
+    /**
+     * Prueba el método `insertJugador` del servicio de jugadores para insertar un nuevo jugador en la base de datos.
+     */
     @Test
     void insertJugador(){
         User juanito = jugadorRepository.save(new User( "juanito","juanito","123456",role1,"1111122","juanito@hotmail.com",33,"Bale"));

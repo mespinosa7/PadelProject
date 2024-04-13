@@ -42,11 +42,15 @@ public class Pareja {
     @JoinColumn(name = "jugador2_id")
     @NotNull
     private User jugador2;
-
+    /**
+     * pareja ganadora del partido
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "parejaGanadora",cascade = CascadeType.PERSIST)
     private List<Partida> partidasGanadas;
-
+    /**
+     *  pareja perdedora del partido
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "parejaPerdedora",cascade = CascadeType.PERSIST)
     private List<Partida> partidasPerdidas;
