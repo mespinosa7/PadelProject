@@ -87,8 +87,9 @@ public class ParejaRepositoryTest {
 
 
     }
-
-
+    /**
+     * Con este test comprobamos que se puede buscar una pareja por su ID. (solo funciona si se hace independiente)
+     */
    // @Test //este test funcina si se hace independiente, pero no el text global
     void findById(){//hay que hacerlo de manera individual y da bueno
         Pareja p = null;
@@ -101,7 +102,9 @@ public class ParejaRepositoryTest {
         assertEquals("abraham",pareja.get().getJugador2().getName());
 
     }
-
+    /**
+     * Con este test comprobamos que se puede buscar una pareja por su ID.
+     */
     @Test
     void buscarById(){
 
@@ -121,7 +124,9 @@ public class ParejaRepositoryTest {
         assertEquals("paco",p2.getJugador2().getName());
 
     }
-
+    /**
+     * Con este test comprobamos que se puede verificar si una pareja existe por su ID.
+     */
     @Test
     void existByID(){
         assertTrue (parejaRepository.existsById(1L));
@@ -130,8 +135,9 @@ public class ParejaRepositoryTest {
     }
 
 
-
-
+    /**
+     * Con este test comprobamos que se puede buscar una pareja por su nombre.
+     */
     @Test
     void pruebaNombre() {
         List<Pareja> lista = parejaRepository.findAll();
@@ -142,6 +148,9 @@ public class ParejaRepositoryTest {
         assertTrue(nombre);
     }
 
+    /**
+     * Con este test comprobamos que se puede eliminar una pareja por su ID.(solo funciona si se hace independiente)
+     */
     // @Test //este test funcina si se hace independiente, pero no el text global
     void deleteById(){//hay que hacerlo de manera individual y da bueno
         Pareja p = null;
@@ -154,6 +163,9 @@ public class ParejaRepositoryTest {
         assertFalse(parejaRepository.existsById(2L));
 
     }
+    /**
+     * Con este test comprobamos que se puede eliminar una pareja por su ID.
+     */
     @Test
     void borrarById(){
         //primero creamos dos usuarios, ubicacion y pareja.. role no hace falta ya que coge sin problemas el ya creado, si utilizamos los creados al inicio, no se porqué

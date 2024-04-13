@@ -24,7 +24,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Esta clase contiene pruebas unitarias para el servicio de Parejas (ParejaService).
+ * Las pruebas se centran en probar el funcionamiento de los métodos del servicio, como buscar
+ * todas las parejas, buscar una pareja por los nombres de usuario de sus integrantes,
+ * buscar parejas por un jugador específico, encontrar una pareja por su ID, eliminar una pareja por su ID
+ * e insertar una nueva pareja.
+ */
 @SpringBootTest
 public class ParejaServiceTest {
 
@@ -82,7 +88,9 @@ public class ParejaServiceTest {
         parejaRepository.deleteAll();
         //ubicacionRepository.deleteAll();
     }
-
+    /**
+     * Prueba el método `findAll` del servicio de parejas para asegurar que devuelve todas las parejas.
+     */
     @Test
     void findAll(){
         List<Pareja> listaParejas = parejaService.findAll();
@@ -90,7 +98,9 @@ public class ParejaServiceTest {
         assertTrue(listaParejas.size() == 2);
 
     }
-
+    /**
+     * Prueba el método `findByUsernames` del servicio de parejas para buscar una pareja por los nombres de usuario de inicio de sesion de sus integrantes.
+     */
     @Test
     void findByUsernames(){
         List<Pareja> listaParejas = parejaService.findAll();
@@ -98,7 +108,10 @@ public class ParejaServiceTest {
         assertFalse(pareja == null);
         assertTrue(pareja.getJugador1().getName().equals("manel"));
     }
-
+    /**
+     * Prueba el método `findParejasByJugador` del servicio de parejas para buscar parejas por un jugador específico
+     * (por su nombre de inicio de sesion).
+     */
     @Test
     void  findParejasByJugador(){
         List<Pareja> listaParejas = parejaService.findAll();
@@ -109,7 +122,9 @@ public class ParejaServiceTest {
             List<Pareja> listaParejasPorJugador = parejaService.findParejasByJugador("manel");
         });
     }
-
+    /**
+     * Prueba el método `findById` del servicio de parejas para encontrar una pareja por su ID.
+     */
     @Test
     void findById(){
         List<Pareja> listaParejas = parejaService.findAll();//buscamos todas las parejas
@@ -120,6 +135,9 @@ public class ParejaServiceTest {
 
     }
 
+    /**
+     * Prueba el método `deleteById` del servicio de parejas para eliminar una pareja por su ID.
+     */
     @Test
     void deleteById(){
         List<Pareja> listaParejas = parejaService.findAll();//buscamos todas las parejas
@@ -132,7 +150,9 @@ public class ParejaServiceTest {
            Pareja pareja2 = parejaService.findById(listaParejas.get(0).getId());//saltará la excepcin al comprobarl que el jugador no exista
         });
     }
-
+    /**
+     * Prueba el método `insertarPareja` del servicio de parejas para insertar una nueva pareja.
+     */
     @Test
     void insertarPareja() throws Exception {
         NewParejaRequest pareja = new NewParejaRequest(user1.getId(),user3.getId());
@@ -141,12 +161,6 @@ public class ParejaServiceTest {
         assertTrue(listaParejas.size() == 3); // las 2 creadas al inicio y esta pareja insertada nueva hacen 3
 
     }
-
-
-
-
-
-
 
 
 }

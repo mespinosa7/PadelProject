@@ -52,7 +52,9 @@ public  class Partida {
     private Date dia;
 
     private String resultado;
-
+    /**
+     * Constructor de la clase Partida con todas las propiedades.
+     */
     public Partida(Pareja pareja1, Pareja pareja2,Pareja parejaGanadora, Pareja parejaPerdedora, Ubicacion ubicacion, Date dia, String resultado) {
         this.pareja1 = pareja1;
         this.pareja2 = pareja2;
@@ -62,6 +64,9 @@ public  class Partida {
         this.dia = dia;
         this.resultado = resultado;
     }
+    /**
+     * Constructor de la clase Partida sin las propiedades de parejas ganadoras y perdedoras.
+     */
     public Partida(Pareja pareja1, Pareja pareja2, Ubicacion ubicacion, Date dia, String resultado) {
         this.pareja1 = pareja1;
         this.pareja2 = pareja2;
@@ -69,7 +74,12 @@ public  class Partida {
         this.dia = dia;
         this.resultado = resultado;
     }
-
+    /**
+     * Método equals para comparar dos objetos Partida.
+     *
+     * @param o Objeto a comparar con esta partida.
+     * @return true si los objetos son iguales, false de lo contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,7 +87,11 @@ public  class Partida {
         Partida partida = (Partida) o;
         return getId().equals(partida.getId()) && getParejaGanadora().equals(partida.getParejaGanadora()) && getParejaPerdedora().equals(partida.getParejaPerdedora()) && getUbicacion().equals(partida.getUbicacion()) && getDia().equals(partida.getDia()) && getResultado().equals(partida.getResultado());
     }
-
+    /**
+     * Método toString que devuelve una representación en cadena de esta partida.
+     *
+     * @return Una cadena que representa esta partida.
+     */
     @Override
     public String toString() {
         return "Partida{" +

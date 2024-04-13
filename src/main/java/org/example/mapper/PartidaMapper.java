@@ -4,9 +4,16 @@ import org.example.DTOs.ParejaDTO;
 import org.example.DTOs.PartidaDTO;
 import org.example.Model.Pareja;
 import org.example.Model.Partida;
-
+/**
+ * Clase que se encarga de mapear un objeto de tipo Partida a un objeto de tipo PartidaDTO.
+ */
 public class PartidaMapper {
-
+    /**
+     * Convierte un objeto Partida en un objeto PartidaDTO.
+     *
+     * @param partida El objeto Partida a ser mapeado.
+     * @return El objeto PartidaDTO mapeado.
+     */
     public PartidaDTO mapPartidaToPartidaDto(Partida partida){
         PartidaDTO partidaDTO=new PartidaDTO();
         partidaDTO.setId(Integer.parseInt(partida.getId().toString()));

@@ -41,6 +41,13 @@ public interface PartidaService {
      */
     public Partida insertPartida(NewPartidaRequest newPartidaRequest) throws Exception;
 
-
+    /**
+     * Actualiza una partida existente en el sistema con la información proporcionada en la solicitud.
+     *
+     * @param newPartidaRequest La solicitud que contiene los datos actualizados de la partida.
+     * @param id El identificador único de la partida que se actualizará.
+     * @return La partida actualizada.
+     * @throws Exception Si ocurre algún error durante el proceso de actualización.
+     */
     Partida updatePartida(NewPartidaRequest newPartidaRequest, Long id) throws Exception;
 }
