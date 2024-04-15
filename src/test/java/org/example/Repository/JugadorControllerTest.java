@@ -17,7 +17,10 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+/**
+ * Clase de prueba para el controlador de Jugador.
+ * Realiza pruebas sobre los endpoints relacionados con la gestión de jugadores.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class JugadorControllerTest {
@@ -34,6 +37,9 @@ public class JugadorControllerTest {
     private User user1;
     private Role role1;
     private Role role2;
+    /**
+     * Preparación de datos para cada prueba.
+     */
     @BeforeEach
     void setUp() {
 
@@ -43,7 +49,12 @@ public class JugadorControllerTest {
 
     }
 
-
+    /**
+     * Prueba el registro de un nuevo jugador.
+     * Debería devolver un mensaje de éxito si el registro es exitoso.
+     *
+     * @throws Exception si ocurre un error durante la ejecución de la prueba.
+     */
     @Test
     public void testRegistrarJugador() throws Exception {
         String username = "testUser";

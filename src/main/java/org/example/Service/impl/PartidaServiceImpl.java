@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+/**
+ * Implementación del PartidaService
+ */
 @Service
 
 @AllArgsConstructor
@@ -30,13 +32,22 @@ public class PartidaServiceImpl implements PartidaService {
     private final ParejaService parejaService;
     private final UbicacionService ubicacionService;
     private final PartidaMapper partidaMapper =new PartidaMapper();
-
+    /**
+     * Obtiene todas las partidas.
+     *
+     * @return Lista de todas las partidas.
+     */
     @Override
     public List<Partida> findAll() {
         List<Partida> partidas =  partidaRepository.findAll();
         return partidas;
     }
-
+    /**
+     * Encuentra las partidas de las que forma parte un usuario.
+     *
+     * @param usernameId El ID del usuario.
+     * @return La respuesta de la solicitud de partida.
+     */
     @Override
     public PartidaResponse findByUsernameId(Long usernameId) {
         User jugador=jugadorService.findById(usernameId);
@@ -48,7 +59,13 @@ public class PartidaServiceImpl implements PartidaService {
         return new PartidaResponse(partidasGanadas,partidasPerdidas,partidasPerdidas.size(),partidasGanadas.size(),Integer.sum(partidasGanadas.size(),partidasPerdidas.size()));
 
     }
-
+    /**
+     * Encuentra una partida por su identificador único.
+     *
+     * @param id Identificador único de la partida.
+     * @return La partida encontrada, si existe.
+     * @throws NotFoundException si no se encuentra ninguna partida con el identificador especificado.
+     */
     @Override
     public Partida findById(Long id) {
         Optional<Partida> partida= partidaRepository.findById(id);
@@ -57,7 +74,12 @@ public class PartidaServiceImpl implements PartidaService {
         }
         return partida.get();
     }
-
+    /**
+     * Elimina una partida por su identificador único.
+     *
+     * @param id Identificador único de la partida a eliminar.
+     * @return true si la partida se eliminó correctamente, false de lo contrario.
+     */
     @Override
     public boolean deleteById(Long id) {
 
@@ -68,7 +90,14 @@ public class PartidaServiceImpl implements PartidaService {
         }
         return true;
     }
-
+    /**
+     * Inserta una nueva partida en la base de datos.
+     *
+     * @param newPartidaRequest La solicitud de creación de nueva partida.
+     * @return La partida creada.
+     * @throws Exception si la partida ya existe, si los jugadores se encuentran en ambas parejas rivales,
+     *                   o si el formato del resultado de los sets no es correcto.
+     */
     @Override
     public Partida insertPartida(NewPartidaRequest newPartidaRequest) throws Exception {
 
@@ -101,7 +130,15 @@ public class PartidaServiceImpl implements PartidaService {
     }
 
 
-
+    /**
+     * Actualiza una partida existente en la base de datos.
+     *
+     * @param newPartidaRequest La solicitud de actualización de partida.
+     * @param id  El ID de la partida a actualizar.
+     * @return La partida actualizada.
+     * @throws Exception si los jugadores se encuentran en ambas parejas rivales
+     *  o si el formato del resultado de los sets no es correcto.
+     */
     @Override
     public Partida updatePartida(NewPartidaRequest newPartidaRequest, Long id) throws Exception {
         Partida partida=findById(id);

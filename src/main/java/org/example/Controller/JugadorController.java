@@ -66,6 +66,14 @@ public class JugadorController {
         return null;
     }
 
+    /**
+     * Obtiene un jugador por su ID de usuario.
+     *
+     * @param request     La solicitud HTTP entrante.
+     * @param usernameId ID del usuario.
+     * @return Usuario que representa al jugador.
+     * @throws Exception Si los usuarios son diferentes.
+     */
     @GetMapping("/{usernameId}")
     @PreAuthorize("hasRole('ROLE_User')")
     @ResponseStatus(HttpStatus.OK)
@@ -81,7 +89,14 @@ public class JugadorController {
         }
         return null;
     }
-
+    /**
+     * Obtiene un jugador DTO por su nombre de usuario.
+     *
+     * @param request  La solicitud HTTP entrante.
+     * @param username Nombre de usuario del jugador.
+     * @return DTO del jugador.
+     * @throws Exception Si los usuarios son diferentes.
+     */
     @GetMapping("jugador/{username}")
     @PreAuthorize("hasRole('ROLE_User')")
     @ResponseStatus(HttpStatus.OK)

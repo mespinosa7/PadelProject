@@ -54,19 +54,39 @@ public class PartidaController {
         return partidaService.findByUsernameId(usernameId);
 
     }
-
+    /**
+     * Obtiene una partida por su ID.
+     *
+     * @param id ID de la partida.
+     * @return DTO de la partida.
+     * @throws Exception Si hay un error al buscar la partida.
+     */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PartidaDTO getPartidaById(@PathVariable Long id) throws Exception {
         return partidaMapper.mapPartidaToPartidaDto(partidaService.findById(id));
     }
-
+    /**
+     * Registra una nueva partida.
+     *
+     * @param newPartidaRequest Objeto que contiene la información de la nueva partida.
+     * @return ResponseEntity con un mensaje de éxito o error.
+     * @throws Exception Si hay un error al registrar la partida.
+     */
     @PostMapping("/insert")
     public ResponseEntity<?> registrarPartida(@Valid @RequestBody NewPartidaRequest newPartidaRequest) throws Exception {
 
         partidaService.insertPartida(newPartidaRequest);
         return ResponseEntity.ok(new MessageResponse("Partida registered successfully!"));
     }
+    /**
+     * Actualiza una partida existente.
+     *
+     * @param newPartidaRequest Objeto que contiene la información actualizada de la partida.
+     * @param id                ID de la partida a actualizar.
+     * @return ResponseEntity con un mensaje de éxito o error.
+     * @throws Exception Si hay un error al actualizar la partida.
+     */
     @PostMapping("/update/{id}")
     public ResponseEntity<?> updatePartida(@Valid @RequestBody NewPartidaRequest newPartidaRequest, @PathVariable Long id) throws Exception {
 

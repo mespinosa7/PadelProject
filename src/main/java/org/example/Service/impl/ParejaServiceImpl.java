@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * Implementación de ParejeService
+ */
 @Service
 
 @AllArgsConstructor
@@ -23,13 +25,24 @@ public class ParejaServiceImpl implements ParejaService {
     private final JugadorService jugadorService;
     private final JugadorRepository jugadorRepository;
 
-
+    /**
+     * Obtiene todas las parejas.
+     *
+     * @return Lista de todas las parejas.
+     */
     @Override
     public List<Pareja> findAll() {
         ArrayList<Pareja> parejas =  (ArrayList<Pareja>)parejaRepository.findAll();
         return parejas;
     }
-
+    /**
+     * Encuentra una pareja por los nombres de usuario de sus miembros.
+     *
+     * @param username1 Nombre de usuario del primer miembro de la pareja.
+     * @param username2 Nombre de usuario del segundo miembro de la pareja.
+     * @return La pareja encontrada, si existe.
+     * @throws NotFoundException si no se encuentra ninguna pareja con los usuarios especificados.
+     */
     @Override
     public Pareja findByUsernames(String username1, String username2) {
         Optional<Pareja> pareja=parejaRepository.findByJugador1AndJugador2(username1,username2);
@@ -40,7 +53,12 @@ public class ParejaServiceImpl implements ParejaService {
         }
 
     }
-
+    /**
+     * Encuentra todas las parejas en las que participa un jugador.
+     *
+     * @param username Nombre de usuario del jugador.
+     * @return Lista de parejas en las que participa el jugador.
+     */
     @Override
     public List<Pareja> findParejasByJugador(String username) {
         User jugador=jugadorService.findByUsername(username);
@@ -48,7 +66,13 @@ public class ParejaServiceImpl implements ParejaService {
         totalParejas.addAll(jugador.getParejasComoJugador2());
         return totalParejas;
     }
-
+    /**
+     * Encuentra una pareja por su identificador único.
+     *
+     * @param id Identificador único de la pareja.
+     * @return La pareja encontrada, si existe.
+     * @throws NotFoundException si no se encuentra ninguna pareja con el identificador especificado.
+     */
     @Override
     public Pareja findById(Long id) {
         Optional<Pareja> pareja=parejaRepository.findById(id);
@@ -57,7 +81,12 @@ public class ParejaServiceImpl implements ParejaService {
         }
         return pareja.get();
     }
-
+    /**
+     * Elimina una pareja por su identificador único.
+     *
+     * @param id Identificador único de la pareja a eliminar.
+     * @return true si la pareja se eliminó correctamente, false de lo contrario.
+     */
     @Override
     public boolean deleteById(Long id) {
 
@@ -68,7 +97,13 @@ public class ParejaServiceImpl implements ParejaService {
         }
         return true;
     }
-
+    /**
+     * Inserta una nueva pareja en la base de datos.
+     *
+     * @param newParejaRequest La solicitud de creación de nueva pareja.
+     * @return La pareja creada.
+     * @throws Exception si la pareja ya existe o si ambos miembros de la pareja son el mismo usuario.
+     */
     @Override
     public Pareja insertPareja(NewParejaRequest newParejaRequest) throws Exception {
         User jugador1=jugadorService.findById(newParejaRequest.getUser1Id());

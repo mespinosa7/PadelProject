@@ -39,6 +39,10 @@ public interface UbicacionRepository extends JpaRepository<Ubicacion, Long> {
      */
     boolean existsByName(String name);
 
+    /**
+     * Elimina un usuario de la BD (no se utiliza en la práctica)
+     * @param id identificador del usuario a eliminar}.
+     */
     void deleteById(Long id);
 
 

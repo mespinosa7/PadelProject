@@ -22,17 +22,22 @@ public class PartidaResponse {
      * Lista partidas ganadas.
      */
     private List<PartidaDTO> partidasGanadas;
-    /**
-     * Nombre de usuario de la segunda pareja.
-     */
-    /**
-     * Lista partidas perdidas.
-     */
 
+    /**
+     * Lista de partidas perdidas.
+     */
     private List<PartidaDTO> partidasPerdidas;
-
+    /**
+     * Total de partidas perdidas.
+     */
     private int totalPartidasPerdidas;
+    /**
+     * Total de partidas ganadas.
+     */
     private int totalPartidasGanadas;
+    /**
+     * Total de partidas (ganadas + perdidas).
+     */
     private int totalPartidas;
 
 }

@@ -1,8 +1,6 @@
 package org.example.payload.request;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,7 +10,9 @@ import javax.validation.constraints.NotNull;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+
 public class NewParejaRequest {
     /**
      * Nombre del usuario de la primera pareja.

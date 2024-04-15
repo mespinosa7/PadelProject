@@ -47,6 +47,10 @@ public interface JugadorService {
      */
     public User insertJugador(User jugador);
 
-
+    /**
+     * Comrpueba si existe un jugador
+     * @param username nombre que utiliza el usuario para iniciar sesion
+     * @return verdadero o false dependiendo del resultado
+     */
     boolean existsJugador(String username);
 }

@@ -2,9 +2,16 @@ package org.example.mapper;
 
 import org.example.DTOs.ParejaDTO;
 import org.example.Model.Pareja;
-
+/**
+ * Clase que se encarga de mapear (convertir) un objeto de tipo Pareja a un objeto de tipo ParejaDTO.
+ */
 public class ParejaMapper {
-
+    /**
+     * Convierte un objeto Pareja en un objeto ParejaDTO.
+     *
+     * @param pareja El objeto Pareja a ser mapeado.
+     * @return El objeto ParejaDTO mapeado.
+     */
     public ParejaDTO mapParejaToParejaDto(Pareja pareja){
         ParejaDTO parejaDto=new ParejaDTO();
         parejaDto.setId(Integer.parseInt(pareja.getId().toString()));

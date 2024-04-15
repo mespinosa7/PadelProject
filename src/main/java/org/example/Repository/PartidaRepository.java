@@ -30,12 +30,22 @@ public interface PartidaRepository extends JpaRepository<Partida, Long> {
      * @return true si se elimina correctamente, false de lo contrario.
      */
     void deleteById(Long id);
-
+    /**
+     * Busca las partidas donde participa una pareja ganadora que tenga un jugador con un nombre de usuario específico.
+     *
+     * @param username El nombre de usuario del jugador.
+     * @return Lista de partidas donde la pareja ganadora incluye al jugador.
+     */
     @Query("""
             select p from Partida p
             where p.parejaGanadora.jugador1.username = ?1 or p.parejaGanadora.jugador2.username = ?1""")
     List<Partida> findByParejaGanadora_Jugador1_UsernameOrParejaGanadora_Jugador2_Username(String username);
-
+    /**
+     * Busca las partidas donde participa una pareja perdedora que tenga un jugador con un nombre de usuario específico.
+     *
+     * @param username El nombre de usuario del jugador.
+     * @return Lista de partidas donde la pareja perdedora incluye al jugador.
+     */
     @Query("""
             select p from Partida p
             where p.parejaPerdedora.jugador1.username = ?1 or p.parejaPerdedora.jugador2.username = ?1""")
