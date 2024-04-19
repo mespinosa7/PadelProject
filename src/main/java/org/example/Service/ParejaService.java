@@ -1,5 +1,6 @@
 package org.example.Service;
 
+import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.Model.Pareja;
 import org.example.Model.Ubicacion;
 import org.example.Model.User;
@@ -45,4 +46,5 @@ public interface ParejaService {
     public Pareja insertPareja(NewParejaRequest newParejaRequest) throws Exception;
 
 
+    EstadisticasParejasResponse getEstadisticasJugadores();
 }

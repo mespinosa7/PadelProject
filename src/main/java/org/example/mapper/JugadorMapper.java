@@ -1,13 +1,13 @@
 package org.example.mapper;
 
+import org.example.DTOs.EstadisticasJugadoresResponse;
 import org.example.DTOs.JugadorDTO;
-import org.example.DTOs.ParejaDTO;
 import org.example.Model.Pareja;
 import org.example.Model.User;
 
-import java.util.Collections;
-import java.util.Objects;
-import java.util.OptionalInt;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * Clase que se encarga de mapear un objeto de tipo User a un objeto de tipo JugadorDTO.
  */
@@ -31,6 +31,33 @@ public class JugadorMapper {
 
 
         return jugadorDTO;
+
+    }
+    public EstadisticasJugadoresResponse getEstadisticasJugadoresResponse(List<User> all) {
+        EstadisticasJugadoresResponse estadisticasJugadoresResponse = new EstadisticasJugadoresResponse();
+        Map<String,List<Integer>> partidasGanadasPerdidas=all.stream()
+                .collect(Collectors.toMap(
+                        User::getUsername,
+                        user -> Arrays.asList(getPartidasGanadas(user), getPartidasPerdidas(user))
+                ));
+        Map<String,Double> porcentajeVictorias=all.stream()
+                .collect(Collectors.toMap(
+                        User::getUsername,
+                        user->calcularPorcentajeVictorias(user)
+                ));
+        Map<String, List<Integer>> partidasGanadasPerdidasOrdenadoPorGanadas = partidasGanadasPerdidas.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue((lista1, lista2) -> lista2.get(0).compareTo(lista1.get(0))))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+
+        Map<String, Double> porcentajeVictoriasOrdenado = porcentajeVictorias.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        estadisticasJugadoresResponse.setPartidasGanadasPerdidas(partidasGanadasPerdidasOrdenadoPorGanadas);
+        estadisticasJugadoresResponse.setPorcentajesVicotrias(porcentajeVictoriasOrdenado);
+        return estadisticasJugadoresResponse;
 
     }
     /**
@@ -66,5 +93,16 @@ public class JugadorMapper {
 
         // Devolver el total de partidas ganadas o 0 si es que no hay ninguna
         return OptionalInt.of(totalPartidasPerdidas).orElse(0);
+    }
+
+    public double calcularPorcentajeVictorias(User jugador) {
+        int partidasGanadas = getPartidasGanadas(jugador);
+        int partidasPerdidas = getPartidasPerdidas(jugador);
+
+        if (partidasGanadas + partidasPerdidas == 0) {
+            return 0.0;
+        }
+
+        return (double) partidasGanadas / (partidasGanadas + partidasPerdidas) * 100.0;
     }
 }

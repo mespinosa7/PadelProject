@@ -1,5 +1,6 @@
 package org.example.Service.impl;
 import lombok.AllArgsConstructor;
+import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.Pareja;
 import org.example.Model.User;
@@ -7,6 +8,7 @@ import org.example.Repository.JugadorRepository;
 import org.example.Repository.ParejaRepository;
 import org.example.Service.JugadorService;
 import org.example.Service.ParejaService;
+import org.example.mapper.ParejaMapper;
 import org.example.payload.request.NewParejaRequest;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class ParejaServiceImpl implements ParejaService {
     private final ParejaRepository parejaRepository;
     private final JugadorService jugadorService;
     private final JugadorRepository jugadorRepository;
-
+    private final ParejaMapper parejaMapper;
     /**
      * Obtiene todas las parejas.
      *
@@ -121,6 +123,11 @@ public class ParejaServiceImpl implements ParejaService {
             jugadorRepository.save(jugador2);
             return pareja;
         }
+    }
+
+    @Override
+    public EstadisticasParejasResponse getEstadisticasJugadores() {
+        return parejaMapper.getEstadisticasParejasReponse(findAll());
     }
 
 

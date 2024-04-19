@@ -1,5 +1,7 @@
 package org.example.Controller;
 import lombok.AllArgsConstructor;
+import org.example.DTOs.EstadisticasJugadoresResponse;
+import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.Model.Pareja;
 import org.example.DTOs.ParejaDTO;
 import org.example.Service.ParejaService;
@@ -73,6 +75,13 @@ public class ParejaController {
 
         parejaService.insertPareja(newParejaRequest);
         return ResponseEntity.ok(new MessageResponse("Pareja registered successfully!"));
+    }
+
+    @GetMapping("/estadisticas")
+    @ResponseStatus(HttpStatus.OK)
+    public EstadisticasParejasResponse getEstadisticasParejas(HttpServletRequest request) throws Exception {
+
+        return parejaService.getEstadisticasJugadores();
     }
 
 

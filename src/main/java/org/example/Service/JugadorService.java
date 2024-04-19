@@ -1,8 +1,9 @@
 package org.example.Service;
 
+import org.example.DTOs.EstadisticasJugadoresResponse;
+import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.Model.User;
 import org.example.payload.request.UpdateJugadorRequest;
-import org.example.payload.response.UserResponse;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,4 +54,8 @@ public interface JugadorService {
      * @return verdadero o false dependiendo del resultado
      */
     boolean existsJugador(String username);
+
+    EstadisticasJugadoresResponse getEstadisticasJugadores();
+
+    EstadisticasParejasResponse getEstadisticasJugador(Long jugadorId);
 }

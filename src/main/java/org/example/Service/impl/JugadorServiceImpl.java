@@ -2,12 +2,16 @@ package org.example.Service.impl;
 
 
 import lombok.AllArgsConstructor;
+import org.example.DTOs.EstadisticasJugadoresResponse;
+import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.User;
 import org.example.Repository.JugadorRepository;
 import org.example.Service.JugadorService;
+import org.example.Service.ParejaService;
+import org.example.mapper.JugadorMapper;
+import org.example.mapper.ParejaMapper;
 import org.example.payload.request.UpdateJugadorRequest;
-import org.example.payload.response.UserResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +31,9 @@ public class JugadorServiceImpl  implements JugadorService {
     private final JugadorRepository jugadorRepository;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
+    private final JugadorMapper jugadorMapper;
+    private final ParejaMapper parejaMapper;
+    private final ParejaService parejaService;
     /**
      * Recupera todos los jugadores del repositorio.
      * @return Lista de jugadores.
@@ -123,6 +130,17 @@ public class JugadorServiceImpl  implements JugadorService {
     public boolean existsJugador(String username) {
 
         return jugadorRepository.existsByUsername(username);
+    }
+
+    @Override
+    public EstadisticasJugadoresResponse getEstadisticasJugadores() {
+        return jugadorMapper.getEstadisticasJugadoresResponse(findAll());
+    }
+
+    @Override
+    public EstadisticasParejasResponse getEstadisticasJugador(Long jugadorId) {
+        User jugador=findById(jugadorId);
+        return parejaMapper.getEstadisticasParejasReponsePorJugador(parejaService.findParejasByJugador(jugador.getUsername()),jugador.getName());
     }
 
 }

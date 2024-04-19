@@ -1,6 +1,8 @@
 package org.example.Controller;
 
 import lombok.AllArgsConstructor;
+import org.example.DTOs.EstadisticasJugadoresResponse;
+import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.DTOs.JugadorDTO;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.User;
@@ -8,9 +10,7 @@ import org.example.Service.JugadorService;
 import org.example.mapper.JugadorMapper;
 import org.example.payload.request.UpdateJugadorRequest;
 import org.example.payload.response.MessageResponse;
-import org.example.payload.response.UserResponse;
 import org.example.security.jwt.JwtUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -136,6 +136,20 @@ public class JugadorController {
         return ResponseEntity.ok(new MessageResponse("Player updated successfully!"));
 
 
+    }
+
+    @GetMapping("/estadisticas")
+    @ResponseStatus(HttpStatus.OK)
+    public EstadisticasJugadoresResponse getEstadisticasJugadores(HttpServletRequest request) throws Exception {
+
+        return jugadorService.getEstadisticasJugadores();
+    }
+
+    @GetMapping("/estadisticas/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public EstadisticasParejasResponse getEstadisticasJugador(HttpServletRequest request, @PathVariable Long id) throws Exception {
+
+        return jugadorService.getEstadisticasJugador(id);
     }
 
     /**
