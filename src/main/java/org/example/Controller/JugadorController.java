@@ -7,6 +7,7 @@ import org.example.DTOs.JugadorDTO;
 import org.example.Exceptions.NotFoundException;
 import org.example.Model.User;
 import org.example.Service.JugadorService;
+import org.example.Service.ParejaService;
 import org.example.mapper.JugadorMapper;
 import org.example.payload.request.UpdateJugadorRequest;
 import org.example.payload.response.MessageResponse;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class JugadorController {
     private final JugadorService jugadorService;
+    private final ParejaService parejaService;
     private final JugadorMapper jugadorMapper= new JugadorMapper();
     private final JwtUtils jwUtils;
     /**
@@ -148,8 +150,9 @@ public class JugadorController {
     @GetMapping("/estadisticas/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EstadisticasParejasResponse getEstadisticasJugador(HttpServletRequest request, @PathVariable Long id) throws Exception {
+        User jugador =jugadorService.findById(id);
 
-        return jugadorService.getEstadisticasJugador(id);
+        return jugadorService.getEstadisticasParejasJugador(parejaService.findParejasByJugador(jugador.getUsername()),jugador.getName());
     }
 
     /**

@@ -2,6 +2,7 @@ package org.example.Service;
 
 import org.example.DTOs.EstadisticasJugadoresResponse;
 import org.example.DTOs.EstadisticasParejasResponse;
+import org.example.Model.Pareja;
 import org.example.Model.User;
 import org.example.payload.request.UpdateJugadorRequest;
 
@@ -57,5 +58,5 @@ public interface JugadorService {
 
     EstadisticasJugadoresResponse getEstadisticasJugadores();
 
-    EstadisticasParejasResponse getEstadisticasJugador(Long jugadorId);
+    EstadisticasParejasResponse getEstadisticasParejasJugador(List<Pareja> parejasJugador, String name);
 }

@@ -131,23 +131,16 @@ public class AuthServiceImpl implements AuthService {
         Pareja pareja16=parejaRepository.save(new Pareja(user3,user6));
 
 
-        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
-        Partida partida2=partidaRepository.save(new Partida(pareja1,pareja3,pareja1,pareja2, ubi1,new Date(2024,7,20),"4-6,6-2,6-3,6-4"));
-        Partida partida3=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,7,22),"4-6,6-2,6-3,6-4"));
-        Partida partida4=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,8,12),"4-6,6-2,6-3,6-4"));
-        Partida partida5=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,12,11),"4-6,6-2,6-3,6-4"));
-        Partida partida6=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,10,8),"4-6,6-2,6-3,6-4"));
-        Partida partida7=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,9,9),"4-6,6-2,6-3,6-4"));
-        Partida partida8=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,9,6),"4-6,6-2,6-3,6-4"));
-        Partida partida9=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,8,2),"4-6,6-2,6-3,6-4"));
-        Partida partida10=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,6,4),"4-6,6-2,6-3,6-4"));
-        Partida partida11=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,6,19),"4-6,6-2,6-3,6-4"));
-        Partida partida12=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,5,21),"4-6,6-2,6-3,6-4"));
-        Partida partida13=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,5,22),"4-6,6-2,6-3,6-4"));
-        Partida partida14=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,3,23),"4-6,6-2,6-3,6-4"));
-        Partida partida15=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,3,26),"4-6,6-2,6-3,6-4"));
-        Partida partida16=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,1,30),"4-6,6-2,6-3,6-4"));
-        Partida partida17=partidaRepository.save(new Partida(pareja1,pareja2,pareja1,pareja2, ubi1,new Date(2024,1,7),"4-6,6-2,6-3,6-4"));
+        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
+        Partida partida2=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,new Date(2024,7,20),"4-6,6-2,6-3,6-4"));
+        Partida partida3=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,new Date(2024,7,22),"4-6,6-2,6-3,6-4"));
+        Partida partida4=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,new Date(2024,8,12),"4-6,6-2,6-3,6-4"));
+        Partida partida5=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,new Date(2024,12,11),"4-6,6-2,6-3,6-4"));
+        Partida partida6=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
+        Partida partida7=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,new Date(2024,7,20),"4-6,6-2,6-3,6-4"));
+        Partida partida8=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,new Date(2024,7,22),"4-6,6-2,6-3,6-4"));
+        Partida partida9=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,new Date(2024,8,12),"4-6,6-2,6-3,6-4"));
+        Partida partida10=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,new Date(2024,12,11),"4-6,6-2,6-3,6-4"));
 
 
     }

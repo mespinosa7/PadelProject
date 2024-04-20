@@ -26,7 +26,7 @@ public class ParejaServiceImpl implements ParejaService {
     private final ParejaRepository parejaRepository;
     private final JugadorService jugadorService;
     private final JugadorRepository jugadorRepository;
-    private final ParejaMapper parejaMapper;
+    private final ParejaMapper parejaMapper=new ParejaMapper();
     /**
      * Obtiene todas las parejas.
      *

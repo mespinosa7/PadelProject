@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.example.DTOs.EstadisticasJugadoresResponse;
 import org.example.DTOs.EstadisticasParejasResponse;
 import org.example.Exceptions.NotFoundException;
+import org.example.Model.Pareja;
 import org.example.Model.User;
 import org.example.Repository.JugadorRepository;
 import org.example.Service.JugadorService;
@@ -31,9 +32,8 @@ public class JugadorServiceImpl  implements JugadorService {
     private final JugadorRepository jugadorRepository;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
-    private final JugadorMapper jugadorMapper;
-    private final ParejaMapper parejaMapper;
-    private final ParejaService parejaService;
+    private final JugadorMapper jugadorMapper= new JugadorMapper();
+    private final ParejaMapper parejaMapper=new ParejaMapper();
     /**
      * Recupera todos los jugadores del repositorio.
      * @return Lista de jugadores.
@@ -138,9 +138,9 @@ public class JugadorServiceImpl  implements JugadorService {
     }
 
     @Override
-    public EstadisticasParejasResponse getEstadisticasJugador(Long jugadorId) {
-        User jugador=findById(jugadorId);
-        return parejaMapper.getEstadisticasParejasReponsePorJugador(parejaService.findParejasByJugador(jugador.getUsername()),jugador.getName());
+    public EstadisticasParejasResponse getEstadisticasParejasJugador(List<Pareja> parejasJugador,String name) {
+
+        return parejaMapper.getEstadisticasParejasReponsePorJugador(parejasJugador, name);
     }
 
 }
