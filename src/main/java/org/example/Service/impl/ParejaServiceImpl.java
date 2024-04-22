@@ -108,8 +108,8 @@ public class ParejaServiceImpl implements ParejaService {
      */
     @Override
     public Pareja insertPareja(NewParejaRequest newParejaRequest) throws Exception {
-        User jugador1=jugadorService.findById(newParejaRequest.getUser1Id());
-        User jugador2=jugadorService.findById(newParejaRequest.getUser2Id());
+        User jugador1=jugadorService.findById(newParejaRequest.getJugador1());
+        User jugador2=jugadorService.findById(newParejaRequest.getJugador2());
 
         Optional<Pareja> parejaExistente=parejaRepository.findByJugador1AndJugador2(jugador1.getUsername(),jugador2.getUsername());
         if(parejaExistente.isPresent()){

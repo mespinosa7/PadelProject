@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -131,16 +132,16 @@ public class AuthServiceImpl implements AuthService {
         Pareja pareja16=parejaRepository.save(new Pareja(user3,user6));
 
 
-        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
-        Partida partida2=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,new Date(2024,7,20),"4-6,6-2,6-3,6-4"));
-        Partida partida3=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,new Date(2024,7,22),"4-6,6-2,6-3,6-4"));
-        Partida partida4=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,new Date(2024,8,12),"4-6,6-2,6-3,6-4"));
-        Partida partida5=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,new Date(2024,12,11),"4-6,6-2,6-3,6-4"));
-        Partida partida6=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,new Date(2024,2,23),"4-6,6-2,6-3,6-4"));
-        Partida partida7=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,new Date(2024,7,20),"4-6,6-2,6-3,6-4"));
-        Partida partida8=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,new Date(2024,7,22),"4-6,6-2,6-3,6-4"));
-        Partida partida9=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,new Date(2024,8,12),"4-6,6-2,6-3,6-4"));
-        Partida partida10=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,new Date(2024,12,11),"4-6,6-2,6-3,6-4"));
+        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1, Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida2=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida3=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida4=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida5=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida6=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida7=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida8=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida9=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
+        Partida partida10=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,Timestamp.valueOf("2024-04-23 00:00:00"),"4-6,6-2,6-3,6-4"));
 
 
     }

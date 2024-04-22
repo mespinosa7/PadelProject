@@ -34,31 +34,74 @@ public class JugadorMapper {
 
     }
     public EstadisticasJugadoresResponse getEstadisticasJugadoresResponse(List<User> all) {
+        int size = all.size();
+        String[] names = new String[size];
+        String[] namesPorcentaje = new String[size];
+        int[] partidasGanadas = new int[size];
+        int[] partidasPerdidas = new int[size];
+        double[] porcentajeVictorias = new double[size];
+
+        for (int i = 0; i < size; i++) {
+            User user = all.get(i);
+            names[i] = user.getName();
+            partidasGanadas[i] = getPartidasGanadas(user);
+            partidasPerdidas[i] = getPartidasPerdidas(user);
+            namesPorcentaje[i] = user.getName();
+            porcentajeVictorias[i]=calcularPorcentajeVictorias(user);
+        }
+
+        // Sort arrays
+        sortArrays(names, partidasGanadas, partidasPerdidas);
+        sortArraysPorcentaje(namesPorcentaje,porcentajeVictorias);
+
+        // Set values in EstadisticasJugadoresResponse
         EstadisticasJugadoresResponse estadisticasJugadoresResponse = new EstadisticasJugadoresResponse();
-        Map<String,List<Integer>> partidasGanadasPerdidas=all.stream()
-                .collect(Collectors.toMap(
-                        User::getUsername,
-                        user -> Arrays.asList(getPartidasGanadas(user), getPartidasPerdidas(user))
-                ));
-        Map<String,Double> porcentajeVictorias=all.stream()
-                .collect(Collectors.toMap(
-                        User::getUsername,
-                        user->calcularPorcentajeVictorias(user)
-                ));
-        Map<String, List<Integer>> partidasGanadasPerdidasOrdenadoPorGanadas = partidasGanadasPerdidas.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue((lista1, lista2) -> lista2.get(0).compareTo(lista1.get(0))))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        estadisticasJugadoresResponse.setNames(names);
+        estadisticasJugadoresResponse.setPartidasGanadas(partidasGanadas);
+        estadisticasJugadoresResponse.setPartidasPerdidas(partidasPerdidas);
+        estadisticasJugadoresResponse.setNamesPorcentaje(namesPorcentaje);
+        estadisticasJugadoresResponse.setPorcentajeVictorias(porcentajeVictorias);
 
-
-        Map<String, Double> porcentajeVictoriasOrdenado = porcentajeVictorias.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-        estadisticasJugadoresResponse.setPartidasGanadasPerdidas(partidasGanadasPerdidasOrdenadoPorGanadas);
-        estadisticasJugadoresResponse.setPorcentajesVicotrias(porcentajeVictoriasOrdenado);
         return estadisticasJugadoresResponse;
+    }
 
+    private void sortArrays(String[] names, int[] partidasGanadas, int[] partidasPerdidas) {
+        // Sort arrays based on partidasGanadas
+        for (int i = 0; i < partidasGanadas.length - 1; i++) {
+            for (int j = 0; j < partidasGanadas.length - i - 1; j++) {
+                if (partidasGanadas[j] < partidasGanadas[j + 1]) {
+                    // Swap names
+                    String tempUsername = names[j];
+                    names[j] = names[j + 1];
+                    names[j + 1] = tempUsername;
+                    // Swap partidasGanadas
+                    int tempGanadas = partidasGanadas[j];
+                    partidasGanadas[j] = partidasGanadas[j + 1];
+                    partidasGanadas[j + 1] = tempGanadas;
+                    // Swap partidasPerdidas
+                    int tempPerdidas = partidasPerdidas[j];
+                    partidasPerdidas[j] = partidasPerdidas[j + 1];
+                    partidasPerdidas[j + 1] = tempPerdidas;
+                }
+            }
+        }
+    }
+    private void sortArraysPorcentaje(String[] namesPorcentaje, double[] porcentajeVictorias) {
+        // Sort arrays based on porcentajeVictorias
+        for (int i = 0; i < porcentajeVictorias.length - 1; i++) {
+            for (int j = 0; j < porcentajeVictorias.length - i - 1; j++) {
+                if (porcentajeVictorias[j] < porcentajeVictorias[j + 1]) {
+                    // Swap names
+                    String tempUsername = namesPorcentaje[j];
+                    namesPorcentaje[j] = namesPorcentaje[j + 1];
+                    namesPorcentaje[j + 1] = tempUsername;
+                    // Swap porcentajeVictorias
+                    double tempGanadas = porcentajeVictorias[j];
+                    porcentajeVictorias[j] = porcentajeVictorias[j + 1];
+                    porcentajeVictorias[j + 1] = tempGanadas;
+                }
+            }
+        }
     }
     /**
      * Calcula el número total de partidas ganadas por un jugador.

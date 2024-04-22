@@ -18,11 +18,11 @@ public class NewParejaRequest {
      * Nombre del usuario de la primera pareja.
      */
     @NotNull
-    private Long user1Id;
+    private Long jugador1;
     /**
      * Nombre de usuario de la segunda pareja.
      */
     @NotNull
-    private Long user2Id;
+    private Long jugador2;
 
 }

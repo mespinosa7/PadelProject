@@ -13,7 +13,9 @@ import java.util.Map;
 @Getter
 @Setter
 public class EstadisticasParejasResponse {
-    private Map<String, List<Integer>> partidasGanadasPerdidas;
-
-    private Map<String, Double> porcentajesVicotrias;
+    private String[] names;
+    private String[] namesPorcentaje;
+    private int[] partidasGanadas;
+    private int[] partidasPerdidas;
+    private double[] porcentajeVictorias;
 }
