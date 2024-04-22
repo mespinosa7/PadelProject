@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * una pareja en la base de datos o buscar una Pareja por su nombre o por id.
  */
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)//NOTA: esta anotación es importante ya que sin ella los indices
+//de las tablas no se resetean (al hacer un .deleteAll()) y muchos test solo darían buenos si se ejecutan independientemente..
 public class ParejaRepositoryTest {
     @Autowired
     private ParejaRepository parejaRepository;
@@ -90,7 +93,7 @@ public class ParejaRepositoryTest {
     /**
      * Con este test comprobamos que se puede buscar una pareja por su ID. (solo funciona si se hace independiente)
      */
-   // @Test //este test funcina si se hace independiente, pero no el text global
+    @Test //este test funcina si se hace independiente, pero no el text global
     void findById(){//hay que hacerlo de manera individual y da bueno
         Pareja p = null;
         Optional<Pareja> pareja = parejaRepository.findById(2L);
@@ -120,7 +123,7 @@ public class ParejaRepositoryTest {
             p2 = pareja.get();
 
         }
-
+        System.out.println("Nombre del jugador: "+p2.getJugador2().getName());
         assertEquals("paco",p2.getJugador2().getName());
 
     }
@@ -145,13 +148,14 @@ public class ParejaRepositoryTest {
         if (lista.get(0).getJugador2().getName().equals("david")) {
             nombre = true;
         }
+        System.out.println("Nombre del jugador en pruebaNombre: "+nombre);
         assertTrue(nombre);
     }
 
     /**
      * Con este test comprobamos que se puede eliminar una pareja por su ID.(solo funciona si se hace independiente)
      */
-    // @Test //este test funcina si se hace independiente, pero no el text global
+     @Test //este test funcina si se hace independiente, pero no el text global
     void deleteById(){//hay que hacerlo de manera individual y da bueno
         Pareja p = null;
         Optional<Pareja> pareja = parejaRepository.findById(2L);
@@ -185,10 +189,10 @@ public class ParejaRepositoryTest {
         }
         //ahora ya podemos hacer las comprobaciones.. el detalle es conocer el id.. en mi caso es 12 (pero no tengo claro que siempre vaya a ser así)
         System.out.println("id de jugador: "+p2.getId());//En mi entorno el id del jugador es 12, si da error ver que id es el bueno
-        assertTrue(p2.getId() == 12);
-        assertTrue(parejaRepository.existsById(12L));//comprobamos que en el repository esté la pareja con id 12
-        parejaRepository.deleteById(12L);//la eliminamos
-        assertFalse(parejaRepository.existsById(12L));//y comprobamos que ya no está
+        assertTrue(p2.getId() == 3L);
+        assertTrue(parejaRepository.existsById(3L));//comprobamos que en el repository esté la pareja con id 12
+        parejaRepository.deleteById(3L);//la eliminamos
+        assertFalse(parejaRepository.existsById(3L));//y comprobamos que ya no está
 
     }
 

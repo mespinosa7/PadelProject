@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 /**
@@ -18,8 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * un jugador en la base de datos y buscar un jugador por su nombre de usuario o por id.
  */
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)//NOTA: esta anotación es importante ya que sin ella los indices
+//de las tablas no se resetean (al hacer un .deleteAll()) y muchos test solo darían buenos si se ejecutan independientemente..
 class JugadorRepositoryTest {
-
 
     @Autowired
     private RoleRepository roleRepository;
@@ -27,6 +32,8 @@ class JugadorRepositoryTest {
     private JugadorRepository jugadorRepository;
 
     private User user1;
+    private User user2;
+    private User user3;
     private Role role1;
     private Role role2;
     @Autowired
@@ -43,7 +50,8 @@ class JugadorRepositoryTest {
         role1=roleRepository.save(new Role( ERole.ROLE_User));
         role2=roleRepository.save(new Role( ERole.ROLE_Admin));
         user1 = jugadorRepository.save(new User( "manel","manelesp","123456",role1,"1111111","manel@hotmail.com",33,"Perez"));
-
+        user2 = jugadorRepository.save(new User( "ignasi","ignasi","123456",role1,"1111111","ignssi@hotmail.com",33,"Val"));
+        user3 = jugadorRepository.save(new User( "david","david","123456",role1,"1111111","david@hotmail.com",33,"Rodriguez"));
     }
     /**
      * Limpia el entorno después de las pruebas eliminando todos los usuarios y roles creados.
@@ -55,18 +63,20 @@ class JugadorRepositoryTest {
         roleRepository.deleteAll();
 
     }
-    /**
-     * Prueba si se puede guardar un nuevo jugador correctamente en el repositorio.
-     * Se crea un nuevo usuario y se guarda en el repositorio de jugadores.
-     * Luego se comprueba si el usuario se puede recuperar correctamente del repositorio
-     * utilizando el método findByUsername.
-     */
     @Test
-    void save_jugador_successful() {
-        //role1=roleRepository.save(new Role( ERole.ROLE_User));
-        User user2 = jugadorRepository.save(new User( "ignasi","manelesp1","123456",role1,"1111111","manel@hotmail.com",33,"Perez"));
-        assertEquals(user2,jugadorRepository.findByUsername("manelesp1").get());
+    void findAll(){
+        List<User> listaJugadores = jugadorRepository.findAll() ;
+        assertEquals(3,listaJugadores.size());
 
+    }
+    @Test
+    void findById(){
+        Optional<User> jugador = jugadorRepository.findById(2L);
+        User jug = null;
+        if(jugador.isPresent()){
+            jug = jugador.get();
+        }
+        assertEquals(2,jug.getId());
     }
     /**
      * Prueba si se puede encontrar un jugador por su nombre de usuario en el repositorio.
@@ -76,8 +86,7 @@ class JugadorRepositoryTest {
      */
     @Test
     void findByUsername() {
-        User jugador = jugadorRepository.findByUsername("manelesp").get();
-        assertEquals(user1,jugador);
+        assertEquals(user1,jugadorRepository.findByUsername("manelesp").get());
         assertTrue( jugadorRepository.findByUsername("Boing").isEmpty());
 
     }
@@ -89,7 +98,6 @@ class JugadorRepositoryTest {
      */
     @Test
     void updateJugador() {
-        User jugador = jugadorRepository.findByUsername("manelesp").get();
         assertEquals("1111111", user1.getTelefono());
         user1.setTelefono("222222222");
         assertEquals("222222222", user1.getTelefono());
@@ -104,11 +112,21 @@ class JugadorRepositoryTest {
 
     @Test
     void deleteJugador() {
-        User jugador = jugadorRepository.findByUsername("manelesp").get();
-        assertEquals(user1,jugador);
+        assertEquals(user1,jugadorRepository.findByUsername("manelesp").get());
         jugadorRepository.delete(jugadorRepository.findByUsername("manelesp").get());
         assertTrue( jugadorRepository.findByUsername("manelesp").isEmpty());
     }
+
+
+    @Test
+    void existByUsername(){
+        assertTrue( jugadorRepository.existsByUsername("manelesp"));
+        assertTrue( jugadorRepository.existsByUsername("ignasi"));
+        assertTrue( jugadorRepository.existsByUsername("david"));
+        assertFalse( jugadorRepository.existsByUsername("juan"));
+
+    }
+
 
 
 

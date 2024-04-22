@@ -26,6 +26,7 @@ public interface JugadorRepository extends JpaRepository<User, Long> {
     /**
      * Elimina un usuario por su nombre de usuario.
      * @param username Nombre de usuario del usuario a eliminar.
+     * (no se utiliza)
      */
     void deleteByUsername(String username);
     /**

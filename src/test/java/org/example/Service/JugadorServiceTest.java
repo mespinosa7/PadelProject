@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * jugadores por nombre de usuario, verificar si un jugador existe, insertar un nuevo jugador, etc.
  */
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class JugadorServiceTest {
 
     @Autowired

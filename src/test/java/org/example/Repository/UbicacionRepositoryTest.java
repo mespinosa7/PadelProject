@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * una ubicacion en la base de datos y buscar una ubicacion por su nombre o por id.
  */
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class UbicacionRepositoryTest {
 
     @Autowired
@@ -85,7 +87,8 @@ class UbicacionRepositoryTest {
         Ubicacion ubicacion = ubicacionRepository.save(new Ubicacion("la pala2","08751","Carrer lechuga 15 s/n"));
         System.out.println(ubicacion.toString());//con esto vemos que el id es 6
         assertEquals(ubicacion,ubicacionRepository.findByName("la pala2").get());
-        ubicacionRepository.deleteById(10L);
+        //El id de esta nueva ubicación es el 3, ya que antes teniamos creados 2
+        ubicacionRepository.deleteById(3L);
         assertThrows(NoSuchElementException.class, () -> {
             ubicacionRepository.findByName("la pala2").get();// Ahora esto lanzará NoSuchElementException, ya que lo hemos borrado
         });
