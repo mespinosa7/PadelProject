@@ -94,6 +94,13 @@ public class PartidaController {
         return ResponseEntity.ok(new MessageResponse("Partida updated successfully!"));
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePartida(@PathVariable Long id) throws Exception {
+
+        partidaService.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Partida deleted successfully!"));
+    }
+
 
     /**
      * Este método analiza el encabezado de autorización de la solicitud para extraer el token JWT.
