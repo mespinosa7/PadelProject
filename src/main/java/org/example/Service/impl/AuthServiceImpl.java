@@ -162,7 +162,7 @@ public class AuthServiceImpl implements AuthService {
         Partida partida14=partidaRepository.save(new Partida(pareja25,pareja26,pareja26,pareja25, ubi1,Timestamp.valueOf("2024-08-03 00:00:00"),"4-6 6-2 6-3 6-4"));
         Partida partida15=partidaRepository.save(new Partida(pareja20,pareja28,pareja20,pareja28, ubi1,Timestamp.valueOf("2024-10-20 00:00:00"),"4-6 6-2 6-3 6-4"));
         Partida partida16=partidaRepository.save(new Partida(pareja21,pareja25,pareja21,pareja25, ubi1,Timestamp.valueOf("2024-12-15 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida17=partidaRepository.save(new Partida(pareja11,pareja11,pareja17,pareja11, ubi1,Timestamp.valueOf("2024-12-13 00:00:00"),"4-6 6-2 6-3 6-4"));
+        Partida partida17=partidaRepository.save(new Partida(pareja11,pareja17,pareja17,pareja11, ubi1,Timestamp.valueOf("2024-12-13 00:00:00"),"4-6 6-2 6-3 6-4"));
         Partida partida18=partidaRepository.save(new Partida(pareja24,pareja27,pareja27,pareja24, ubi1,Timestamp.valueOf("2024-11-23 00:00:00"),"4-6 6-2 6-3 6-4"));
         Partida partida19=partidaRepository.save(new Partida(pareja23,pareja22,pareja23,pareja22, ubi1,Timestamp.valueOf("2024-04-26 00:00:00"),"4-6 6-2 6-3 6-4"));
         Partida partida20=partidaRepository.save(new Partida(pareja3,pareja11,pareja11,pareja3, ubi1,Timestamp.valueOf("2024-05-21 00:00:00"),"4-6 6-2 6-3 6-4"));
