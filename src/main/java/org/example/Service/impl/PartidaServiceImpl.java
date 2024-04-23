@@ -150,7 +150,8 @@ public class PartidaServiceImpl implements PartidaService {
             throw new Exception("Uno de los jugadores de la partida se encuentra en las dos parejas rivales");
         }
         if(newPartidaRequest.getParejaGanadora()!=null){
-            if(newPartidaRequest.getParejaGanadora().equals(partida.getPareja1().getId())||newPartidaRequest.getParejaPerdedora().equals(partida.getPareja2().getId())){
+
+            if(newPartidaRequest.getParejaGanadora().equals(partida.getPareja1().getId())||newPartidaRequest.getParejaGanadora().equals(partida.getPareja2().getId())){
                 partida.setParejaGanadora(parejaService.findById(newPartidaRequest.getParejaGanadora()));
                 partida.setParejaPerdedora(partida.getParejaGanadora().equals(partida.getPareja1())?partida.getPareja2():partida.getPareja1());
             }else{

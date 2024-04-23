@@ -79,7 +79,7 @@ public class AuthServiceImpl implements AuthService {
         if (jugadorRepository.existsByUsername(signUpJugadorRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Error: El Username ya existe."));
         }
         User user = new User();
         user.setUsername(signUpJugadorRequest.getUsername());
