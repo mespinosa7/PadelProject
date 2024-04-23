@@ -146,26 +146,26 @@ public class AuthServiceImpl implements AuthService {
 
 
 
-        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1, Timestamp.valueOf("2024-04-12 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida2=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,Timestamp.valueOf("2024-05-01 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida3=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-06-02 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida4=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,Timestamp.valueOf("2024-08-03 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida5=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,Timestamp.valueOf("2024-10-20 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida6=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,Timestamp.valueOf("2024-12-15 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida7=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,Timestamp.valueOf("2024-12-13 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida8=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-11-23 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida9=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,Timestamp.valueOf("2024-04-26 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida10=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,Timestamp.valueOf("2024-05-21 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida11=partidaRepository.save(new Partida(pareja1,pareja16,pareja1,pareja16, ubi1, Timestamp.valueOf("2024-04-12 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida12=partidaRepository.save(new Partida(pareja1,pareja25,pareja1,pareja25, ubi1,Timestamp.valueOf("2024-05-01 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida13=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-06-02 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida14=partidaRepository.save(new Partida(pareja25,pareja26,pareja26,pareja25, ubi1,Timestamp.valueOf("2024-08-03 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida15=partidaRepository.save(new Partida(pareja20,pareja28,pareja20,pareja28, ubi1,Timestamp.valueOf("2024-10-20 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida16=partidaRepository.save(new Partida(pareja21,pareja25,pareja21,pareja25, ubi1,Timestamp.valueOf("2024-12-15 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida17=partidaRepository.save(new Partida(pareja11,pareja17,pareja17,pareja11, ubi1,Timestamp.valueOf("2024-12-13 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida18=partidaRepository.save(new Partida(pareja24,pareja27,pareja27,pareja24, ubi1,Timestamp.valueOf("2024-11-23 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida19=partidaRepository.save(new Partida(pareja23,pareja22,pareja23,pareja22, ubi1,Timestamp.valueOf("2024-04-26 00:00:00"),"4-6 6-2 6-3 6-4"));
-        Partida partida20=partidaRepository.save(new Partida(pareja3,pareja11,pareja11,pareja3, ubi1,Timestamp.valueOf("2024-05-21 00:00:00"),"4-6 6-2 6-3 6-4"));
+        Partida partida1=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1, Timestamp.valueOf("2024-04-12 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida2=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,Timestamp.valueOf("2024-05-01 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida3=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-06-02 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida4=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,Timestamp.valueOf("2024-08-03 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida5=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,Timestamp.valueOf("2024-10-20 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida6=partidaRepository.save(new Partida(pareja1,pareja6,pareja1,pareja6, ubi1,Timestamp.valueOf("2024-12-15 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida7=partidaRepository.save(new Partida(pareja1,pareja15,pareja1,pareja15, ubi1,Timestamp.valueOf("2024-12-13 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida8=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-11-23 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida9=partidaRepository.save(new Partida(pareja2,pareja5,pareja5,pareja2, ubi1,Timestamp.valueOf("2024-04-26 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida10=partidaRepository.save(new Partida(pareja2,pareja11,pareja11,pareja2, ubi1,Timestamp.valueOf("2024-05-21 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida11=partidaRepository.save(new Partida(pareja1,pareja16,pareja1,pareja16, ubi1, Timestamp.valueOf("2024-04-12 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida12=partidaRepository.save(new Partida(pareja1,pareja25,pareja1,pareja25, ubi1,Timestamp.valueOf("2024-05-01 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida13=partidaRepository.save(new Partida(pareja1,pareja16,pareja16,pareja1, ubi1,Timestamp.valueOf("2024-06-02 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida14=partidaRepository.save(new Partida(pareja25,pareja26,pareja26,pareja25, ubi1,Timestamp.valueOf("2024-08-03 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida15=partidaRepository.save(new Partida(pareja20,pareja28,pareja20,pareja28, ubi1,Timestamp.valueOf("2024-10-20 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida16=partidaRepository.save(new Partida(pareja21,pareja25,pareja21,pareja25, ubi1,Timestamp.valueOf("2024-12-15 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida17=partidaRepository.save(new Partida(pareja11,pareja17,pareja17,pareja11, ubi1,Timestamp.valueOf("2024-12-13 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida18=partidaRepository.save(new Partida(pareja24,pareja27,pareja27,pareja24, ubi1,Timestamp.valueOf("2024-11-23 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida19=partidaRepository.save(new Partida(pareja23,pareja22,pareja23,pareja22, ubi1,Timestamp.valueOf("2024-04-26 00:00:00"),"4-6 6-2 6-3"));
+        Partida partida20=partidaRepository.save(new Partida(pareja3,pareja11,pareja11,pareja3, ubi1,Timestamp.valueOf("2024-05-21 00:00:00"),"4-6 6-2 6-3"));
 
 
     }

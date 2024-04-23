@@ -59,6 +59,7 @@ public class UbicacionServiceImpl  implements UbicacionService {
         Boolean delete=false;
         try{
             ubicacionRepository.deleteById(id);
+            delete=true;
         }catch(Exception e){
             delete=false;
         }

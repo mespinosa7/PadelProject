@@ -91,8 +91,10 @@ public class UbicacionController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> updateUbicacion(HttpServletRequest request,@PathVariable Long id) throws Exception {
 
-        ubicacionService.deleteById(id);
-        return ResponseEntity.ok(new MessageResponse("Ubicacion deleted successfully!"));
+        return ubicacionService.deleteById(id)?ResponseEntity.ok(new MessageResponse("Ubicación borrada correctamente!")):
+                ResponseEntity.ok(new MessageResponse("Ubicación no se ha podido borrar al pertenecer a una partida"));
+
+
 
 
     }
