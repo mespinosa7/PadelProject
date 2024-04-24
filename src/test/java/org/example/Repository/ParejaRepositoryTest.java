@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Esta clase contiene pruebas unitarias para el repositorio de Parejas (ParejasRepository).
@@ -91,7 +92,8 @@ public class ParejaRepositoryTest {
 
     }
     /**
-     * Con este test comprobamos que se puede buscar una pareja por su ID. (solo funciona si se hace independiente)
+     * Con este test comprobamos que se puede buscar una pareja por su ID y verificamos que
+     * su nombre sea el correcto con ese id.
      */
     @Test //este test funcina si se hace independiente, pero no el text global
     void findById(){//hay que hacerlo de manera individual y da bueno
@@ -106,7 +108,9 @@ public class ParejaRepositoryTest {
 
     }
     /**
-     * Con este test comprobamos que se puede buscar una pareja por su ID.
+     * Con este test comprobamos que se puede buscar una pareja por su ID en el respository
+     * Y verificamos que ese id concuerde con el nombre que debería.. es igual que el método anterior, la
+     * diferencia es que en este creamos nuevos jugadores.
      */
     @Test
     void buscarById(){
@@ -140,6 +144,7 @@ public class ParejaRepositoryTest {
 
     /**
      * Con este test comprobamos que se puede buscar una pareja por su nombre.
+     * Este test es un prueba, no prueba un método concreto de repository
      */
     @Test
     void pruebaNombre() {
@@ -193,6 +198,22 @@ public class ParejaRepositoryTest {
         assertTrue(parejaRepository.existsById(3L));//comprobamos que en el repository esté la pareja con id 12
         parejaRepository.deleteById(3L);//la eliminamos
         assertFalse(parejaRepository.existsById(3L));//y comprobamos que ya no está
+
+    }
+
+    /**
+     * Con este método probamos el método findByJugador1AndJugador2 del respository
+     * Buscamos las parejas por el username de sus dos jugadores y comprobamos si existen.
+     */
+    @Test
+    void findByJugador1AndJugador2(){
+        Optional<Pareja> pareja = parejaRepository.findByJugador1AndJugador2("manelesp","david");
+        assertTrue(pareja.isPresent());
+        Optional<Pareja> pareja2 = parejaRepository.findByJugador1AndJugador2("alex","abraham");
+        assertTrue(pareja2.isPresent());
+        Optional<Pareja> pareja3 = parejaRepository.findByJugador1AndJugador2("manelesp","abraham");
+        assertFalse(pareja3.isPresent());
+
 
     }
 

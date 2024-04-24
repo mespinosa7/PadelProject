@@ -1,8 +1,10 @@
-package org.example.Repository;
+package org.example.Service;
 
 import org.example.Enums.ERole;
 import org.example.Model.Role;
 import org.example.Model.User;
+import org.example.Repository.JugadorRepository;
+import org.example.Repository.RoleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
  * Clase de prueba para el controlador de Jugador.
  * Realiza pruebas sobre los endpoints relacionados con la gestión de jugadores.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class JugadorControllerTest {
+public class AuthServiceTest {
 
     @Autowired
     private MockMvc mockMvc;

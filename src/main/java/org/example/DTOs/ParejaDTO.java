@@ -9,6 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+/**
+ * Clase que representa un DTO (Data Transfer Object) para los datos de las parejas de jugadores.
+ */
 public class ParejaDTO {
     Integer id;
     Integer jugador1;

@@ -33,6 +33,12 @@ public class JugadorMapper {
         return jugadorDTO;
 
     }
+    /**
+     * Obtiene las estadísticas de los jugadores a partir de una lista de usuarios.
+     *
+     * @param all La lista de usuarios.
+     * @return La respuesta con las estadísticas de los jugadores.
+     */
     public EstadisticasJugadoresResponse getEstadisticasJugadoresResponse(List<User> all) {
         int size = all.size();
         String[] names = new String[size];
@@ -64,7 +70,13 @@ public class JugadorMapper {
 
         return estadisticasJugadoresResponse;
     }
-
+    /**
+     * Ordena los arrays de nombres, partidas ganadas y partidas perdidas en función del número de partidas ganadas.
+     *
+     * @param names           Array de nombres de jugadores.
+     * @param partidasGanadas Array de número de partidas ganadas por cada jugador.
+     * @param partidasPerdidas Array de número de partidas perdidas por cada jugador.
+     */
     private void sortArrays(String[] names, int[] partidasGanadas, int[] partidasPerdidas) {
         // Sort arrays based on partidasGanadas
         for (int i = 0; i < partidasGanadas.length - 1; i++) {
@@ -86,6 +98,12 @@ public class JugadorMapper {
             }
         }
     }
+    /**
+     * Ordena los arrays de nombres y porcentajes de victorias en función del porcentaje de victorias.
+     *
+     * @param namesPorcentaje     Array de nombres de jugadores con su porcentaje de victorias.
+     * @param porcentajeVictorias Array de porcentaje de victorias de cada jugador.
+     */
     private void sortArraysPorcentaje(String[] namesPorcentaje, double[] porcentajeVictorias) {
         // Sort arrays based on porcentajeVictorias
         for (int i = 0; i < porcentajeVictorias.length - 1; i++) {
@@ -137,7 +155,12 @@ public class JugadorMapper {
         // Devolver el total de partidas ganadas o 0 si es que no hay ninguna
         return OptionalInt.of(totalPartidasPerdidas).orElse(0);
     }
-
+    /**
+     * Calcula el porcentaje de victorias de un jugador.
+     *
+     * @param jugador El jugador del que se desea calcular el porcentaje de victorias.
+     * @return El porcentaje de victorias del jugador.
+     */
     public double calcularPorcentajeVictorias(User jugador) {
         int partidasGanadas = getPartidasGanadas(jugador);
         int partidasPerdidas = getPartidasPerdidas(jugador);

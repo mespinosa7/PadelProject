@@ -139,14 +139,27 @@ public class JugadorController {
 
 
     }
-
+    /**
+     * Obtiene las estadísticas de todos los jugadores.
+     *
+     * @param request La solicitud HTTP entrante.
+     * @return Respuesta que contiene las estadísticas de todos los jugadores.
+     * @throws Exception Si ocurre un error al obtener las estadísticas.
+     */
     @GetMapping("/estadisticas")
     @ResponseStatus(HttpStatus.OK)
     public EstadisticasJugadoresResponse getEstadisticasJugadores(HttpServletRequest request) throws Exception {
 
         return jugadorService.getEstadisticasJugadores();
     }
-
+    /**
+     * Obtiene las estadísticas de un jugador específico.
+     *
+     * @param request La solicitud HTTP entrante.
+     * @param id      ID del jugador.
+     * @return Respuesta que contiene las estadísticas del jugador.
+     * @throws Exception Si ocurre un error al obtener las estadísticas.
+     */
     @GetMapping("/estadisticas/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EstadisticasParejasResponse getEstadisticasJugador(HttpServletRequest request, @PathVariable Long id) throws Exception {

@@ -124,7 +124,11 @@ public class ParejaServiceImpl implements ParejaService {
             return pareja;
         }
     }
-
+    /**
+     * Obtiene las estadísticas de las parejas, incluyendo el número de partidas ganadas, perdidas y el porcentaje de victorias.
+     *
+     * @return Las estadísticas de las parejas.
+     */
     @Override
     public EstadisticasParejasResponse getEstadisticasJugadores() {
         return parejaMapper.getEstadisticasParejasReponse(findAll());

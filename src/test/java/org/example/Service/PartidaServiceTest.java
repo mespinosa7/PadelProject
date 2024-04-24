@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //No la he utilizado en los test anteriores(porqué no lo conocía y ahora no voy a cambiarlos ya que funcionan conrretamente)
 // pero si lo utilizaré en PartidasRepository y PartidasService y dejo constancia de la importancia de la anotación.
 public class PartidaServiceTest {
+    // Inyección de dependencias de los repositorios y el servicio a ser probado
     @Autowired
     PartidaService partidaService;
     @Autowired
@@ -44,6 +45,7 @@ public class PartidaServiceTest {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
+    // Declaración de variables para usar en las pruebas
     private UbicacionRepository ubicacionRepository;
     private Partida partida1;
     private Partida partida2;
@@ -95,7 +97,11 @@ public class PartidaServiceTest {
         jugadorRepository.deleteAll();
         roleRepository.deleteAll();
     }
-
+    /**
+     * Prueba el método findAll() de PartidaService.
+     * Buscamos todas las partidas y comprobamos que el tamaño
+     * sea el correcto. Luego comprobamos datos esa lista de partidas
+     */
 
     @Test
     void  findall(){
@@ -113,7 +119,11 @@ public class PartidaServiceTest {
         assertEquals(2,listaPartidas.get(2).getParejaGanadora().getId());
 
     }
-
+    /**
+     * Prueba el método findByUsernameId() de PartidaService.
+     * Buscamos partidas  por  id de un jugador y comprobamos que los datos obtenidos
+     * son los correctos. Para ellos comprobamos sus partidas ganadas,perdidas y jugadas
+     */
     @Test
     void findByUsernameId(){
 
@@ -126,7 +136,11 @@ public class PartidaServiceTest {
         assertEquals(3,partidaResponse.getTotalPartidas());
 
     }
-
+    /**
+     * Prueba el método findById() de PartidaService.
+     * Buscamos los datos de una partida a partir de su id
+     * y comprobamos que los datos de esa partida sean los correctos
+     */
     @Test
     void findById(){
         //en el caso de que el id de la partida sea el 3
@@ -140,7 +154,11 @@ public class PartidaServiceTest {
 
     }
 
-
+    /**
+     * Prueba el método insertPartida() de PartidaService.
+     * Comprobamos que podemos insertar partidas y luego comprobamos que
+     * los datos de esas partidas sean correctos
+     */
     @Test
     void insertPartida() throws Exception {
         long ms = 900587459;
@@ -169,7 +187,11 @@ public class PartidaServiceTest {
 
     }
 
-
+    /**
+     * Prueba el método updatePartida() de PartidaService.
+     * Comprobamos que podemos actualizar una partida y que los
+     * datos se ha actualizado correctamente
+     */
 
     @Test
     void updatePartida() throws Exception {
@@ -184,7 +206,11 @@ public class PartidaServiceTest {
 
 
     }
-
+    /**
+     * Prueba el método deleteById() de PartidaService.
+     * Comprobamos que podemos borrar una partida por su id y luego
+     * comprobamos que se ha borrado correctamente
+     */
 
     @Test
     void deleteById(){

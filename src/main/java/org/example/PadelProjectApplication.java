@@ -63,8 +63,8 @@ public class PadelProjectApplication {
             authService.initData();
         };
     }
+*/
 
- */
 
 
     

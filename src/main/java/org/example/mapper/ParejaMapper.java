@@ -34,7 +34,12 @@ public class ParejaMapper {
         return parejaDto;
 
     }
-
+    /**
+     * Obtiene las estadísticas de las parejas a partir de una lista de parejas.
+     *
+     * @param all La lista de parejas.
+     * @return La respuesta con las estadísticas de las parejas.
+     */
     public EstadisticasParejasResponse getEstadisticasParejasReponse(List<Pareja> all) {
         int size = all.size();
         String[] names = new String[size];
@@ -66,7 +71,13 @@ public class ParejaMapper {
 
         return estadisticasParejasResponse;
     }
-
+    /**
+     * Obtiene las estadísticas de las parejas en las que un jugador específico ha participado.
+     *
+     * @param all La lista de parejas.
+     * @param name El nombre del jugador específico.
+     * @return La respuesta con las estadísticas de las parejas del jugador.
+     */
     public EstadisticasParejasResponse getEstadisticasParejasReponsePorJugador(List<Pareja> all,String name) {
         int size = all.size();
         String[] names = new String[size];
@@ -97,7 +108,13 @@ public class ParejaMapper {
 
         return estadisticasParejasResponse;
     }
-
+    /**
+     * Ordena tres arrays simultáneamente basado en el número de partidas ganadas.
+     *
+     * @param names           El array de nombres de jugadores.
+     * @param partidasGanadas El array de partidas ganadas.
+     * @param partidasPerdidas El array de partidas perdidas.
+     */
     private void sortArrays(String[] names, int[] partidasGanadas, int[] partidasPerdidas) {
         // Sort arrays based on partidasGanadas
         for (int i = 0; i < partidasGanadas.length - 1; i++) {
@@ -119,6 +136,12 @@ public class ParejaMapper {
             }
         }
     }
+    /**
+     * Ordena dos arrays simultáneamente basado en el porcentaje de victorias.
+     *
+     * @param namesPorcentaje    El array de nombres de parejas.
+     * @param porcentajeVictorias El array de porcentajes de victorias.
+     */
     private void sortArraysPorcentaje(String[] namesPorcentaje, double[] porcentajeVictorias) {
         // Sort arrays based on porcentajeVictorias
         for (int i = 0; i < porcentajeVictorias.length - 1; i++) {
@@ -136,7 +159,12 @@ public class ParejaMapper {
             }
         }
     }
-
+    /**
+     * Calcula el porcentaje de victorias para una pareja dada.
+     *
+     * @param pareja La pareja para la que se calculará el porcentaje de victorias.
+     * @return El porcentaje de victorias de la pareja.
+     */
     public double calcularPorcentajeVictorias(Pareja pareja) {
         int partidasGanadas = OptionalInt.of(pareja.getPartidasGanadas().size()).orElse(0);
         int partidasPerdidas = OptionalInt.of(pareja.getPartidasPerdidas().size()).orElse(0);

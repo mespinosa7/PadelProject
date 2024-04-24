@@ -131,12 +131,22 @@ public class JugadorServiceImpl  implements JugadorService {
 
         return jugadorRepository.existsByUsername(username);
     }
-
+    /**
+     * Obtiene las estadísticas de los jugadores, incluyendo el número de partidas ganadas, perdidas y el porcentaje de victorias.
+     *
+     * @return Las estadísticas de los jugadores.
+     */
     @Override
     public EstadisticasJugadoresResponse getEstadisticasJugadores() {
         return jugadorMapper.getEstadisticasJugadoresResponse(findAll());
     }
-
+    /**
+     * Obtiene las estadísticas de las parejas de un jugador específico, incluyendo el número de partidas ganadas, perdidas y el porcentaje de victorias.
+     *
+     * @param parejasJugador  Lista de parejas en las que ha participado el jugador.
+     * @param name            El nombre del jugador del cual se desean obtener las estadísticas.
+     * @return                Las estadísticas de las parejas del jugador.
+     */
     @Override
     public EstadisticasParejasResponse getEstadisticasParejasJugador(List<Pareja> parejasJugador,String name) {
 

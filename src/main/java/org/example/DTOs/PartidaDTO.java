@@ -10,6 +10,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+/**
+ * Clase que representa un DTO (Data Transfer Object) para los datos de una partida concreta.
+ */
 public class PartidaDTO {
     Integer id;
     String parejaGanadora;

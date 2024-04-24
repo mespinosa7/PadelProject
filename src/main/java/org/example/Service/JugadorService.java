@@ -55,8 +55,18 @@ public interface JugadorService {
      * @return verdadero o false dependiendo del resultado
      */
     boolean existsJugador(String username);
-
+    /**
+     * Obtiene las estadísticas de los jugadores, incluyendo el número de partidas ganadas, perdidas y el porcentaje de victorias.
+     *
+     * @return Las estadísticas de los jugadores.
+     */
     EstadisticasJugadoresResponse getEstadisticasJugadores();
-
+    /**
+     * Obtiene las estadísticas de las parejas en las que ha participado un jugador específico, incluyendo el número de partidas ganadas, perdidas y el porcentaje de victorias.
+     *
+     * @param parejasJugador La lista de parejas en las que ha participado el jugador.
+     * @param name           El nombre del jugador para el que se desean obtener las estadísticas de las parejas.
+     * @return Las estadísticas de las parejas del jugador especificado.
+     */
     EstadisticasParejasResponse getEstadisticasParejasJugador(List<Pareja> parejasJugador, String name);
 }

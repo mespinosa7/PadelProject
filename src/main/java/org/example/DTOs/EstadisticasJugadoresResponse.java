@@ -13,10 +13,28 @@ import java.util.Map;
 @NoArgsConstructor
 @Getter
 @Setter
+/**
+ * Clase que representa la respuesta de las estadísticas de los jugadores.
+ */
 public class EstadisticasJugadoresResponse {
+    /**
+     * Array de nombres de jugadores.
+     */
     private String[] names;
+    /**
+     * Array de nombres de jugadores con su porcentaje de victorias.
+     */
     private String[] namesPorcentaje;
+    /**
+     * Array de número de partidas ganadas por cada jugador.
+     */
     private int[] partidasGanadas;
+    /**
+     * Array de número de partidas perdidas por cada jugador.
+     */
     private int[] partidasPerdidas;
+    /**
+     * Array de porcentaje de victorias de cada jugador.
+     */
     private double[] porcentajeVictorias;
 }

@@ -64,7 +64,12 @@ public class Pareja {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
     }
-
+    /**
+     * Método equals para comparar dos objetos Pareja.
+     *
+     * @param o Objeto a comparar con esta pareja.
+     * @return true si los objetos son iguales, false de lo contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,7 +77,11 @@ public class Pareja {
         Pareja pareja = (Pareja) o;
         return Objects.equals(getId(), pareja.getId()) && Objects.equals(getJugador1(), pareja.getJugador1()) && Objects.equals(getJugador2(), pareja.getJugador2());
     }
-
+    /**
+     * Método toString que devuelve una representación en cadena de esta pareja.
+     *
+     * @return Una cadena que representa esta pareja.
+     */
     @Override
     public String toString() {
         return "Pareja{" +

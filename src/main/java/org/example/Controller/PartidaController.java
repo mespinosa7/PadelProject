@@ -93,7 +93,13 @@ public class PartidaController {
         partidaService.updatePartida(newPartidaRequest,id);
         return ResponseEntity.ok(new MessageResponse("Partida updated successfully!"));
     }
-
+    /**
+     * Elimina una partida existente por su ID.
+     *
+     * @param id ID de la partida a eliminar.
+     * @return ResponseEntity con un mensaje de éxito o error.
+     * @throws Exception Si ocurre un error durante la eliminación.
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deletePartida(@PathVariable Long id) throws Exception {
 

@@ -76,7 +76,13 @@ public class ParejaController {
         parejaService.insertPareja(newParejaRequest);
         return ResponseEntity.ok(new MessageResponse("Pareja registered successfully!"));
     }
-
+    /**
+     * Obtiene las estadísticas de las parejas de jugadores.
+     *
+     * @param request La solicitud HTTP entrante.
+     * @return Respuesta que contiene las estadísticas de las parejas de jugadores.
+     * @throws Exception Si ocurre un error al obtener las estadísticas.
+     */
     @GetMapping("/estadisticas")
     @ResponseStatus(HttpStatus.OK)
     public EstadisticasParejasResponse getEstadisticasParejas(HttpServletRequest request) throws Exception {

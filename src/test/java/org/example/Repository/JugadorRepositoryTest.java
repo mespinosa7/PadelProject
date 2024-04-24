@@ -63,12 +63,23 @@ class JugadorRepositoryTest {
         roleRepository.deleteAll();
 
     }
+
+
+    /**
+     * Prueba si se puede encontrar la lista de jugadores en el repository
+     * y verifica que el tamaño sea correcto
+     */
     @Test
     void findAll(){
         List<User> listaJugadores = jugadorRepository.findAll() ;
         assertEquals(3,listaJugadores.size());
 
     }
+    /**
+     * Prueba si se puede encontrar un jugador por su id de usuario en el repositorio.
+     * Además, se verifica si el id de ese usuario es correcto(2).
+     */
+
     @Test
     void findById(){
         Optional<User> jugador = jugadorRepository.findById(2L);
@@ -117,7 +128,9 @@ class JugadorRepositoryTest {
         assertTrue( jugadorRepository.findByUsername("manelesp").isEmpty());
     }
 
-
+    /**
+     * Prueba si existen jugadores comprobando su username
+     */
     @Test
     void existByUsername(){
         assertTrue( jugadorRepository.existsByUsername("manelesp"));

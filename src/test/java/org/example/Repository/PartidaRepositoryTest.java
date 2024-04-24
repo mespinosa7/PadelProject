@@ -93,6 +93,9 @@ public class PartidaRepositoryTest {
 
     }
 
+    /**
+     * Busca todas las partidas y comprueba el tamaño (debe ser 3)
+     */
 
     @Test
     void findAll(){
@@ -105,6 +108,10 @@ public class PartidaRepositoryTest {
 
     }
 
+    /**
+     * Busca una partida por su id y comprueba si la pareja ganadora es la correcta(se puede comprobar revisando
+     * el método de inicio setup())
+     */
     @Test
     void findById(){
         List<Partida> listaPartidas = partidaRepository.findAll();
@@ -136,6 +143,11 @@ public class PartidaRepositoryTest {
 
     }
 
+    /**
+     * Busca las partidas ganadas por el username de uno de sus jugadores y en el test se comprueba si el número de partidas
+     * ganadas por ese jugador son correctas y comprobamos algunos datos de esas partidas, concretamente comprobamos
+     * el username del primer jugador de la primera pareja
+     */
     @Test
     void buscarParejaGanadora(){
         List<Partida> listaPartidas = partidaRepository.findByParejaGanadora_Jugador1_UsernameOrParejaGanadora_Jugador2_Username("david");
@@ -144,10 +156,14 @@ public class PartidaRepositoryTest {
         //david es el username del segundo jugador, el del primero es manelesp, vamos a comprobarlo en la primera partida ganada por esta pareja.
         assertEquals("manelesp",listaPartidas.get(0).getPareja1().getJugador1().getUsername());
         //si comprobamos el username del segundo jugador, en el segundo registro será alex, ya que las parejas están cambiadas de lugar al introducirlas
+        //(es decir estamos comprobando datos de las partidas.. se puede comporbar viendo en el método setup())
         assertEquals("alex",listaPartidas.get(1).getPareja1().getJugador1().getUsername());
     }
 
-
+    /**
+     * Basca las partidas pertidas por el username de uno de sus jugadores, y se comrpueba que el tamaño de la lista sea correcto y
+     * algún dato sobre esas partidas
+     */
     @Test
     void buscarParejaPerdedora(){
         List<Partida> listaPartidas = partidaRepository.findByParejaPerdedora_Jugador1_UsernameOrParejaPerdedora_Jugador2_Username("david");
@@ -158,8 +174,9 @@ public class PartidaRepositoryTest {
     }
 
 
-
-
+    /**
+     * Se busca y elimina una partida por su id y se comprueba su eliminación
+     */
     @Test
     void deleteById(){
         Partida p = null;
