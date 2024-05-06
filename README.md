@@ -32,7 +32,7 @@ El proyecto sigue una estructura estándar de una aplicación Spring Boot, con l
 Para información técnica más detallada se puede explorar:
  - Los propios comentarios del código
  - La documentación generada con java docs (https://mespinosa7.github.io/PadelProject/)
- -La documentación generada copn swagger de los endpoints disponibles. Se tendra que ir a http://localhost:8080/swagger-ui/index.html#/ una vez arrancado el proyecto.
+ - La documentación generada copn swagger de los endpoints disponibles. Se tendra que ir a http://localhost:8080/swagger-ui/index.html#/ una vez arrancado el proyecto.
 
 
 
